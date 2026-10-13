@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071c18"><meta name="description" content="NRCC Ibadan football match-day lineup: Team APJ vs Team PFO, with live Firebase scoreboard and secure admin controls.">
+<title>NRCC Ibadan | APJ vs PFO Match Day</title>
+<style>
+:root{--night:#071c18;--deep:#0d3027;--grass:#167348;--lime:#c9f36b;--gold:#f6cb69;--paper:#f4f7f3;--ink:#13241d;--muted:#6c7b72;--line:#dfe8df;--white:#fff;--blue:#2d6fe5;--blue2:#1648a4;--green:#15905b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{width:min(1120px,100% - 28px);margin-inline:auto}
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(ellipse at 88% 0%,#226f51 0,transparent 33%),radial-gradient(ellipse at 0% 100%,#153f35 0,transparent 38%),linear-gradient(135deg,#061b16,#0b2b23 55%,#071b17);padding:26px 0 30px}.hero:after{content:"";position:absolute;inset:0;opacity:.08;background-image:linear-gradient(35deg,transparent 48%,#fff 49%,transparent 50%);background-size:42px 42px;pointer-events:none}.topline{display:flex;align-items:center;gap:12px;position:relative;z-index:1}.crest{width:64px;height:58px;display:grid;place-items:center;flex-shrink:0;border:1px solid #c9f36b;border-radius:14px;background:linear-gradient(145deg,#174b38,#09271e);box-shadow:0 7px 12px #0004;padding:4px}.crest img{width:100%;height:100%;object-fit:contain;display:block}.crest.logo-missing:after{content:"NRCC";font-size:12px;font-weight:1000;color:#c9f36b;letter-spacing:1px}.brandtext{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c5e4d3;font-weight:850}.brandtext strong{display:block;color:#fff;font-size:15px;letter-spacing:1px;margin-top:4px}.live{margin-left:auto;border:1px solid #ffffff35;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;letter-spacing:1.3px;color:var(--lime);white-space:nowrap}.hero-title{position:relative;z-index:1;text-align:center;padding-top:24px}.kicker{font-size:10px;letter-spacing:3px;font-weight:900;color:var(--lime);text-transform:uppercase}.hero h1{font-size:clamp(33px,7.5vw,65px);line-height:.98;letter-spacing:-2px;margin:12px 0 11px;font-weight:1000}.hero h1 span{color:var(--lime)}.subtitle{margin:0;color:#d2e3d9;font-size:14px}.match-details{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:850px;margin:20px auto 0}.detail-card{border:1px solid #ffffff2e;background:#ffffff0c;border-radius:14px;padding:13px 14px;text-align:center}.detail-card .detail-label{display:block;color:#c5e4d3;font-size:9px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}.detail-card strong{font-size:14px;color:#fff;line-height:1.4}.countdown-card{grid-column:1/-1;border:1px solid #c9f36b55;background:linear-gradient(100deg,#c9f36b18,#ffffff0b);border-radius:16px;padding:15px;text-align:center}.countdown-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--lime);font-weight:1000}.countdown{display:flex;justify-content:center;gap:10px;margin-top:10px}.time-unit{min-width:60px;padding:9px 8px;background:#04150f99;border:1px solid #ffffff18;border-radius:10px}.time-unit strong{display:block;font-size:clamp(20px,4vw,29px);font-variant-numeric:tabular-nums;color:#fff;line-height:1.1}.time-unit span{display:block;color:#c5e4d3;font-size:8px;letter-spacing:1.2px;font-weight:900;margin-top:5px}.arrival-note{margin-top:11px;color:#ffe39a;font-size:11px;font-weight:900;letter-spacing:1px}.scoreline{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;max-width:660px;margin:24px auto 0;position:relative;z-index:1}.club{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 10px;border:1px solid #ffffff2e;background:#ffffff0c;border-radius:16px}.club .mini-crest{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-weight:1000;color:white;font-size:12px}.club.apj .mini-crest{background:linear-gradient(135deg,#15905b,#0d5b3d)}.club.pfo .mini-crest{background:linear-gradient(135deg,#428aff,#1648a4)}.club strong{display:block;font-size:18px;letter-spacing:.5px}.club small{display:block;color:#c3d7cd;font-size:9px;letter-spacing:1px;margin-top:3px}.vs{font-size:13px;font-weight:1000;color:var(--gold);letter-spacing:2px}
+main{padding:23px 0 34px}.summary{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 18px}.summary h2{font-size:22px;letter-spacing:-.5px;margin:0}.summary p{font-size:12px;color:var(--muted);margin:5px 0 0}.stats{display:flex;gap:7px;flex-wrap:wrap}.stat{background:#e7efe7;border:1px solid #dce8dc;border-radius:999px;padding:8px 11px;font-size:11px;font-weight:850;color:#315243}.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.team-card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 35px #0c29130b}.team-head{color:white;padding:17px 18px;display:flex;align-items:center;gap:12px}.team-head.apj{background:linear-gradient(115deg,#0c5b3b,#15905b)}.team-head.pfo{background:linear-gradient(115deg,#153e89,#2d6fe5)}.team-symbol{width:43px;height:43px;display:grid;place-items:center;border:1px solid #ffffff50;background:#ffffff18;border-radius:14px;font-weight:1000;font-size:13px}.team-head h3{margin:0;font-size:21px;letter-spacing:.2px}.team-head p{margin:4px 0 0;font-size:11px;color:#e1f0e8}.manager-line{display:flex;align-items:center;gap:6px;margin-top:7px;font-size:10px;color:#effff5;font-weight:800;letter-spacing:.2px}.manager-line b{display:inline-flex;align-items:center;justify-content:center;padding:4px 7px;border-radius:999px;background:#ffffff24;border:1px solid #ffffff45;letter-spacing:1px}.player-token{width:74px;max-width:24%;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;color:#fff;font-size:10px;font-weight:850;text-shadow:0 1px 3px #003c25;overflow-wrap:anywhere}.player-avatar{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#f7fff4,#c9f36b);color:#104b32;border:2px solid #ffffffd9;box-shadow:0 4px 9px #003b2466;font-size:10px;font-weight:1000;text-shadow:none;letter-spacing:-.3px}.pfo-card .player-avatar{background:linear-gradient(145deg,#fff,#9ec4ff);color:#1748a0}.jersey-number{font-size:9px;letter-spacing:.4px;font-weight:1000;background:#061c15c9;border:1px solid #ffffff75;border-radius:5px;padding:2px 5px;color:#fff;text-shadow:none}.pfo-card .jersey-number{background:#0c2e69d9}.pitch-position{font-size:8px;line-height:1.1;letter-spacing:.35px;text-transform:uppercase;color:#e7ffe9;text-shadow:0 1px 3px #003c25;font-weight:1000;white-space:nowrap}.pfo-card .pitch-position{color:#e4eeff}.squad-count{margin-left:auto;text-align:right;font-size:19px;font-weight:1000}.squad-count small{display:block;font-size:9px;letter-spacing:1.4px;font-weight:800;opacity:.85}.section-heading{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 10px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:1000;color:#617268}.section-heading span:last-child{font-size:9px;letter-spacing:.4px;background:#edf3ed;border-radius:999px;padding:6px 8px;color:#4f685a}
+.pitch-wrap{padding:0 12px 13px}.pitch{position:relative;overflow:hidden;border-radius:14px;border:2px solid #e7f2e8;min-height:350px;padding:16px 8px;background:repeating-linear-gradient(0deg,#177b4d 0px,#177b4d 48px,#137247 48px,#137247 96px)}.pitch:before{content:"";position:absolute;inset:10px;border:1.5px solid #ffffff9c;border-radius:7px;pointer-events:none}.pitch:after{content:"";position:absolute;width:92px;height:92px;border:1.5px solid #ffffff8c;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}.half-line{position:absolute;left:10px;right:10px;top:50%;border-top:1.5px solid #ffffff8c}.box{position:absolute;left:50%;transform:translateX(-50%);width:42%;height:34px;border:1.5px solid #ffffff8c}.box.top{top:10px;border-top:0}.box.bottom{bottom:10px;border-bottom:0}.formation{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-between;min-height:314px;gap:17px}.lineup-row{display:flex;justify-content:space-evenly;align-items:center;gap:4px}.lineup-row.row-mid{padding:0 7%}.lineup-row.row-back{padding:0 2%}.player-token{width:66px;max-width:23%;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;color:#fff;font-size:10px;font-weight:850;text-shadow:0 1px 3px #003c25;overflow-wrap:anywhere}.shirt{width:29px;height:29px;display:grid;place-items:center;border-radius:9px 9px 7px 7px;background:#f8fff7;color:#12603d;font-size:10px;font-weight:1000;text-shadow:none;box-shadow:0 3px 7px #003b2466;border:1px solid #ffffffa8}.pfo-card .shirt{color:#1748a0}.position-note{font-size:10px;color:#6b7e72;line-height:1.5;padding:0 16px 14px}.roster{padding:0 12px 12px}.player-list{display:grid;gap:6px}.player{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid #edf1ed;border-radius:11px;background:#fff;min-width:0}.num{width:30px;height:30px;display:grid;place-items:center;flex-shrink:0;border-radius:9px;background:#edf4ee;color:#365b45;font-size:11px;font-weight:1000}.pfo-card .num{background:#edf2ff;color:#214f9c}.player-name{font-size:13px;font-weight:800;overflow-wrap:anywhere}.role{margin-left:auto;font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:#7b8a80;font-weight:900}.sub-block{border-top:1px solid #edf1ed;margin-top:12px;padding-top:11px}.sub-block .section-heading{padding:0 4px 9px}.sub-block .section-heading span:last-child{background:#fff3d8;color:#88651c}.sub-block .player{background:#fbfcfb}.sub-block .num{background:#fff1cf;color:#876316}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:19px 0}.btn{appearance:none;border:0;border-radius:13px;padding:13px 17px;font:800 13px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px}.btn-main{background:var(--night);color:white;box-shadow:0 7px 15px #071c181a}.btn-alt{background:#fff;color:var(--ink);border:1px solid var(--line)}.notice{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;color:#64736a;font-size:12px;line-height:1.65}.notice-icon{font-size:20px;flex-shrink:0}.notice strong{color:#263b2f}.footer{text-align:center;color:#829087;font-size:11px;padding:24px 8px 8px}.footer b{color:#315d43}.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#071c18;color:#fff;padding:12px 16px;border-radius:12px;font-size:12px;font-weight:800;box-shadow:0 8px 25px #0003;transition:.2s;z-index:10;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.match-details{grid-template-columns:1fr}.detail-card{padding:11px}.countdown{gap:6px}.time-unit{min-width:0;flex:1;padding:9px 4px}.team-grid{grid-template-columns:1fr}.hero{padding-top:20px}.hero-title{padding-top:23px}.scoreline{gap:7px}.club{gap:7px;padding:12px 7px}.club strong{font-size:16px}.club .mini-crest{width:29px;height:29px}.wrap{width:min(1120px,100% - 22px)}.summary h2{font-size:20px}.pitch{min-height:330px}.formation{min-height:294px}.player-token{width:69px;font-size:10px}.team-card{border-radius:18px}}
+@media(min-width:761px){.team-grid{align-items:start}.pitch{min-height:370px}.formation{min-height:334px}}
+
+/* Firebase live centre and admin controls, styled to match the primary page */
+.live-center{margin:22px 0;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 35px #0c29130b}
+.live-center-head{padding:16px 18px;background:linear-gradient(120deg,#0b2b23,#153e89);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.live-center-head h2{margin:0;font-size:18px}.connection{font-size:10px;font-weight:900;letter-spacing:.8px;border:1px solid #ffffff45;border-radius:999px;padding:7px 10px;color:#ffe2a8}
+.live-scoreboard{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:22px 18px;text-align:center}.score-team{font-size:12px;font-weight:900;letter-spacing:1px}.score-number{font-size:clamp(42px,10vw,68px);font-weight:1000;line-height:1.1;color:#0c3929;margin-top:5px}.score-team.pfo-score .score-number{color:#214f9c}.score-separator{font-size:13px;font-weight:1000;color:#8a9a8e}
+.match-meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 14px 17px}.match-chip{font-size:11px;font-weight:850;background:#edf4ee;color:#315243;border-radius:999px;padding:8px 11px}.match-chip.status-live{background:#ffe8e4;color:#a22b1c}.match-chip.status-finished{background:#e8edff;color:#234b9b}
+.events-area{border-top:1px solid var(--line);padding:16px 18px}.events-area h3{font-size:13px;margin:0 0 11px}.event-list{display:grid;gap:8px}.event-item{display:flex;gap:10px;align-items:flex-start;border:1px solid #edf1ed;border-radius:11px;padding:10px}.event-minute{font-size:11px;font-weight:1000;color:#fff;background:#167348;border-radius:7px;padding:5px 7px;min-width:42px;text-align:center}.event-text{font-size:12px;line-height:1.45;overflow-wrap:anywhere}.empty-events{font-size:12px;color:var(--muted)}
+.admin-area{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}.admin-toggle{width:100%;border:0;background:#edf2ff;color:#204a96;padding:15px 17px;text-align:left;font:900 13px system-ui;cursor:pointer}.admin-body{display:none;padding:17px}.admin-body.open{display:block}.admin-note{font-size:12px;line-height:1.6;color:#66776b;margin:0 0 14px}.admin-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.admin-field{display:grid;gap:6px;font-size:11px;font-weight:900;color:#52665a}.admin-field input,.admin-field select,.admin-field textarea{width:100%;min-height:43px;border:1px solid #dce7dd;border-radius:10px;padding:10px;font:13px system-ui;background:#fff;color:#17271e}.admin-field textarea{min-height:210px;resize:vertical;line-height:1.7}.squad-edit-card{border:1px solid #e2ebe2;border-radius:14px;padding:13px;background:#f9fcf9}.squad-edit-card h4{margin:0 0 10px;font-size:13px}.squad-edit-card.apj h4{color:#117347}.squad-edit-card.pfo h4{color:#214f9c}.squad-edit-help{font-size:11px;color:#68796d;line-height:1.55;margin:0 0 12px}.admin-wide{grid-column:1/-1}.admin-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.admin-message{font-size:12px;margin-top:10px;color:#315243;line-height:1.5;overflow-wrap:anywhere}.admin-message.error{color:#ad2c20}.admin-user{font-size:12px;color:#53695b;margin:10px 0;overflow-wrap:anywhere}.admin-hidden{display:none!important}.admin-divider{border:0;border-top:1px solid #e8eee8;margin:17px 0}.admin-small{font-size:11px;color:#64756a;line-height:1.5}.award-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:16px}.award-card{border:1px solid #e0e9e1;border-radius:14px;padding:14px;background:linear-gradient(145deg,#fff,#f3f8f2);min-width:0}.award-card .award-label{font-size:9px;text-transform:uppercase;letter-spacing:1.3px;color:#6c7b72;font-weight:1000}.award-card h4{margin:7px 0 5px;font-size:16px;color:#153f2e}.award-card p{font-size:11px;color:#68796d;line-height:1.5;margin:0}.award-card .award-team{display:inline-block;margin-top:9px;border-radius:999px;background:#e7f1e7;padding:5px 8px;font-size:9px;font-weight:1000;color:#28533b}.award-empty{padding:0 16px 16px;font-size:12px;color:#718075}.admin-sub-card{padding:13px;border:1px solid #e0e9e1;border-radius:14px;background:#f8fbf8;margin:12px 0}.admin-sub-card h4{margin:0 0 10px;font-size:13px;color:#1a5138}.undo-note{font-size:10px;color:#78877d;margin-top:7px;line-height:1.45}.btn:disabled{opacity:.45;cursor:not-allowed}.directions-link{display:inline-flex;margin-top:9px;color:#1648a4;font-weight:850;text-decoration:none;font-size:12px}.directions-link:hover{text-decoration:underline}
+@media(max-width:520px){.admin-form{grid-template-columns:1fr}.admin-wide{grid-column:auto}.live-scoreboard{padding:18px 10px}.score-team{font-size:10px}.score-separator{font-size:10px}}
+
+
+/* Goal scorers are displayed beneath the score for their own team. */
+.goal-scorers { margin-top:10px; padding-top:9px; border-top:1px solid rgba(255,255,255,.18); width:100%; text-align:left; font-size:12px; line-height:1.45; }
+.goal-scorers-title { display:block; margin-bottom:5px; color:rgba(255,255,255,.72); font-size:10px; font-weight:900; letter-spacing:1.1px; text-transform:uppercase; }
+.goal-scorer-row { display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:3px 0; }
+.goal-scorer-name { font-weight:850; overflow-wrap:anywhere; }
+.goal-scorer-minute { color:var(--lime); white-space:nowrap; font-weight:900; }
+.goal-scorers-empty { color:rgba(255,255,255,.62); font-size:11px; }
+@media (max-width:540px) { .goal-scorers { font-size:11px; } .goal-scorer-row { align-items:flex-start; } }
+
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<div class="topline"><div class="crest"><img src="images/nrcc-logo.png" alt="New Reality Christian Centre logo" onerror="this.style.display='none';this.parentElement.classList.add('logo-missing')"></div><div class="brandtext">NRCC IBADAN<strong>Football Fellowship</strong></div><div class="live">● MATCH DAY</div></div>
+<div class="hero-title"><div class="kicker">The official team announcement</div><h1>THE BEAUTIFUL<br><span>GAME.</span></h1><p class="subtitle">One fellowship. Two squads. One beautiful game.</p></div>
+<div class="match-details" aria-label="Match date, time and venue">
+<div class="detail-card"><span class="detail-label">Match date</span><strong>Saturday, 14 November 2026</strong></div>
+<div class="detail-card"><span class="detail-label">Kick-off</span><strong>8:00 AM WAT</strong></div>
+<div class="detail-card"><span class="detail-label">Venue</span><strong>University of Ibadan Stadium</strong></div>
+<div class="countdown-card"><div class="countdown-title" id="countdown-title">Countdown to kick-off</div><div class="countdown" id="countdown" aria-live="polite"><div class="time-unit"><strong id="days">--</strong><span>DAYS</span></div><div class="time-unit"><strong id="hours">--</strong><span>HOURS</span></div><div class="time-unit"><strong id="minutes">--</strong><span>MINUTES</span></div><div class="time-unit"><strong id="seconds">--</strong><span>SECONDS</span></div></div><div class="arrival-note">PLEASE ARRIVE BEFORE 7:30 AM</div></div>
+</div>
+<div class="scoreline"><div class="club apj"><div class="mini-crest">APJ</div><div><strong>TEAM APJ</strong><small>THE GREEN SQUAD</small></div></div><div class="vs">VS</div><div class="club pfo"><div class="mini-crest">PFO</div><div><strong>TEAM PFO</strong><small>THE BLUE SQUAD</small></div></div></div>
+</div></header>
+<main class="wrap"><div class="summary"><div><h2>Match-day lineups</h2><p>The published draw for the NRCC Ibadan football teams.</p></div><div class="stats"><span class="stat">⚽ 30 Players</span><span class="stat">👕 22 Starters</span><span class="stat">🔁 8 Subs</span></div></div>
+
+<section class="live-center" aria-label="Live match scoreboard">
+  <div class="live-center-head"><h2>⚽ Live Match Centre</h2><span class="connection" id="connectionState">CONNECTING…</span></div>
+  <div class="live-scoreboard">
+    <div class="score-team apj-score"><div class="score-number" id="scoreAPJ">0</div><div class="goal-scorers" id="goalScorersAPJ" aria-live="polite"><span class="goal-scorers-title">Goalscorers</span><span class="goal-scorers-empty">No goals recorded yet</span></div></div>
+    <div class="score-separator">LIVE SCORE</div>
+    <div class="score-team pfo-score"><div class="score-number" id="scorePFO">0</div><div class="goal-scorers" id="goalScorersPFO" aria-live="polite"><span class="goal-scorers-title">Goalscorers</span><span class="goal-scorers-empty">No goals recorded yet</span></div></div>
+  </div>
+  <div class="match-meta"><span class="match-chip" id="matchStatus">SCHEDULED</span><span class="match-chip" id="matchMinute">Before kickoff</span><span class="match-chip">📍 University of Ibadan Stadium</span><span class="match-chip">🗓 Saturday, 14 November 2026 · 8:00 AM WAT</span></div>
+  <div class="events-area"><h3>Match timeline</h3><div class="event-list" id="eventList"><p class="empty-events">Match events will appear here when the admin adds them.</p></div></div>
+</section>
+<section class="live-center" id="awardsBoard" aria-label="Individual awards">
+  <div class="live-center-head"><h2>🏅 Individual Awards</h2><span class="connection">HONOURING THE PLAYERS</span></div>
+  <div class="award-grid" id="awardList"><div class="award-card"><div class="award-label">Match-day honours</div><h4>Awards will appear here</h4><p>The match administrators will publish individual award winners during or after the game.</p></div></div>
+</section>
+<section class="live-center" id="matchReport" aria-label="Match report and performance summary">
+  <div class="live-center-head"><h2>📊 Match Report & Performance Review</h2><span class="connection" id="reportState">LIVE SUMMARY</span></div>
+  <div class="award-grid" id="reportSummary"><div class="award-card"><div class="award-label">Match analysis</div><h4>Report will build as match events are recorded</h4><p>Goals, cards, substitutions, final result, awards and improvement prompts will appear here.</p></div></div>
+  <div class="admin-actions" style="padding:0 16px 16px;margin-top:0"><button class="btn btn-main" id="downloadReport" type="button">⬇ Download match report (JSON)</button><button class="btn btn-alt" id="downloadReportCSV" type="button">⬇ Download event log (CSV)</button><button class="btn btn-alt" id="archiveReport" type="button">☁ Save report to Firebase archive</button></div>
+  <p class="admin-small" style="padding:0 16px 16px;margin:0">Export the report before clearing the board. The JSON report is designed to preserve match data for later app development and season-to-season analysis.</p>
+</section>
+<section class="admin-area" id="adminArea">
+  <button class="admin-toggle" id="adminToggle" type="button" aria-expanded="false">🔐 ADMIN CONTROL ROOM · Sign in</button>
+  <div class="admin-body" id="adminBody"><p class="admin-note">Authorized administrators can update the score, match status and timeline. Updates sync live to everyone viewing this page.</p>
+    <div id="loginPanel"><div class="admin-form"><label class="admin-field admin-wide">Administrator email<input id="adminEmail" type="email" autocomplete="username" placeholder="Enter your Firebase admin email"></label><label class="admin-field admin-wide">Password<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Firebase password"></label></div><div class="admin-actions"><button class="btn btn-main" id="loginButton" type="button">Sign in</button></div></div>
+    <div id="controlsPanel" class="admin-hidden"><div class="admin-user" id="adminIdentity"></div>
+      <div class="admin-form"><label class="admin-field">Team APJ score<input id="editAPJ" type="number" min="0" max="99" value="0" inputmode="numeric"></label><label class="admin-field">Team PFO score<input id="editPFO" type="number" min="0" max="99" value="0" inputmode="numeric"></label><label class="admin-field">Match status<select id="editStatus"><option value="Scheduled">Scheduled</option><option value="First Half">First Half</option><option value="Half Time">Half Time</option><option value="Second Half">Second Half</option><option value="Full Time">Full Time</option><option value="Postponed">Postponed</option><option value="Cancelled">Cancelled</option></select></label><label class="admin-field">Match minute / phase<input id="editMinute" type="text" maxlength="24" placeholder="e.g. 35' or HT"></label></div>
+      <div class="admin-actions"><button class="btn btn-main" id="saveScore" type="button">Save scoreboard</button><button class="btn btn-alt" id="undoScore" type="button">↶ Undo last score change</button><button class="btn btn-alt" id="signOutButton" type="button">Sign out</button><p class="undo-note admin-wide">Undo restores the previous score, match status and minute. Goal events published through the event form also create an undo point.</p></div><hr class="admin-divider"><h3 style="font-size:14px;margin:0 0 12px">Publish a match event</h3>
+      <div class="admin-form"><label class="admin-field">Event minute<input id="eventMinute" type="text" maxlength="24" placeholder="e.g. 23' or HT"></label><label class="admin-field">Event type<select id="eventType"><option value="Match update">Match update</option><option value="Goal">Goal</option><option value="Goal · Team APJ">Goal · Team APJ (legacy option)</option><option value="Goal · Team PFO">Goal · Team PFO (legacy option)</option><option value="Yellow card">Yellow card</option><option value="Red card">Red card</option><option value="Substitution">Substitution</option><option value="Half-time">Half-time</option><option value="Full-time">Full-time</option></select></label><label class="admin-field">Goal / event team<select id="eventTeam"><option value="apj">Team APJ · Green</option><option value="pfo">Team PFO · Blue</option><option value="neutral">Neutral / both teams</option></select></label><label class="admin-field">Goalscorer (required for goals)<input id="goalScorer" type="text" maxlength="80" placeholder="Enter player name"></label><label class="admin-field admin-wide">Event description / assist details<input id="eventDescription" type="text" maxlength="180" placeholder="e.g. Assisted by Sapphire, finished from close range"></label></div><div class="admin-actions"><button class="btn btn-main" id="addEvent" type="button">Publish event</button></div><div class="admin-actions"><button class="btn btn-alt" id="undoEvent" type="button" disabled>↶ Undo last event</button></div><p class="undo-note">Selecting a Team APJ or Team PFO goal here automatically adds one goal to that team's score. You don't need to update that goal manually as well.</p>
+      <div class="admin-sub-card"><h4>🔁 Make a substitution</h4><p class="squad-edit-help">Choose the team, player coming off, player coming on, and match minute. Publishing will add a substitution card to the live match timeline.</p><div class="admin-form"><label class="admin-field">Team<select id="subTeam"><option value="apj">Team APJ</option><option value="pfo">Team PFO</option></select></label><label class="admin-field">Match minute<input id="subMinute" type="text" maxlength="24" placeholder="e.g. 62′"></label><label class="admin-field">Player coming off<select id="subPlayerOff"></select></label><label class="admin-field">Player coming on<select id="subPlayerOn"></select></label></div><div class="admin-actions"><button class="btn btn-main" id="publishSubstitution" type="button">Publish substitution</button></div></div>
+      <hr class="admin-divider"><h3 style="font-size:14px;margin:0 0 8px">🏅 Publish individual awards</h3><p class="squad-edit-help">Publish award winners for the match. Each award category keeps its latest winner and appears on the public page in real time.</p><div class="admin-form"><label class="admin-field">Award category<select id="awardCategory"><option>Man of the Match</option><option>Best Goalkeeper</option><option>Best Defender</option><option>Best Midfielder</option><option>Best Forward</option><option>Best Substitute Impact</option><option>Fair Play Award</option><option>Most Valuable Player</option></select></label><label class="admin-field">Player's team<select id="awardTeam"><option value="apj">Team APJ</option><option value="pfo">Team PFO</option><option value="neutral">Not team-specific</option></select></label><label class="admin-field">Award winner<input id="awardWinner" type="text" maxlength="80" placeholder="Enter player's name"></label><label class="admin-field">Citation / reason<input id="awardCitation" type="text" maxlength="180" placeholder="e.g. decisive saves and leadership"></label></div><div class="admin-actions"><button class="btn btn-main" id="publishAward" type="button">Publish award winner</button></div>
+      <hr class="admin-divider"><h3 style="font-size:14px;margin:0 0 8px">📝 Edit team squads</h3>
+      <p class="squad-edit-help">Update player names directly here. Enter one player per line, in order: the first 11 are starters and the final 4 are substitutes. Keep 15 names for each team. Changes are saved to Firebase and appear for everyone viewing the website.</p>
+      <div class="admin-form">
+        <div class="squad-edit-card apj"><h4>🟢 Team APJ · Manager PDA</h4><label class="admin-field">Team manager<input id="editManagerAPJ" type="text" maxlength="40" value="PDA"></label><label class="admin-field" style="margin-top:10px">Players, one per line<textarea id="editSquadAPJ" spellcheck="false"></textarea></label></div>
+        <div class="squad-edit-card pfo"><h4>🔵 Team PFO · Manager PSA</h4><label class="admin-field">Team manager<input id="editManagerPFO" type="text" maxlength="40" value="PSA"></label><label class="admin-field" style="margin-top:10px">Players, one per line<textarea id="editSquadPFO" spellcheck="false"></textarea></label></div>
+      </div>
+      <div class="admin-actions"><button class="btn btn-main" id="saveSquads" type="button">Save squad changes</button><button class="btn btn-alt" id="reloadSquads" type="button">Reload saved squads</button></div>
+      <p class="admin-small">Jersey numbers remain assigned by roster slot, and the first 11 names appear on the pitch. To replace a player, edit that line without changing the number of lines.</p>
+      <p class="admin-small">Firestore security rules must authorize only the configured admin UID to write. The page also checks the signed-in user's UID before showing or allowing admin actions.</p>
+      <hr class="admin-divider"><h3 style="font-size:14px;margin:0 0 8px">🧹 Master clean / reset match board</h3>
+      <p class="squad-edit-help">Clears the scoreboard, match status/minute, timeline events, awards and undo history in one operation. Saved squads are preserved unless you explicitly tick the option below. Export your report first if you want to keep the match record.</p>
+      <label class="admin-field" style="display:flex;align-items:center;gap:9px;margin:12px 0"><input id="resetSquadsToo" type="checkbox" style="width:18px;min-height:18px"> Also restore both squads and managers to the original default lists</label>
+      <div class="admin-actions"><button class="btn btn-alt" id="masterReset" type="button" style="border-color:#e3b7b1;color:#9c2f23">🧹 Master clean: reset match board</button></div>
+      <p class="admin-small">This action is destructive and requires a second confirmation. Exported reports are not deleted from your computer.</p>
+    </div><div class="admin-message" id="adminMessage" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<div class="team-grid" id="teams"></div>
+<div class="actions"><button class="btn btn-main" id="share">↗ Share match-day lineups</button><button class="btn btn-alt" id="copy">▤ Copy team list</button></div>
+<div class="notice"><div class="notice-icon">📍</div><div><strong>Match-day reminder</strong><br>Kick-off is at <strong>8:00 AM on Saturday, 14 November 2026</strong> at the <strong>University of Ibadan Stadium</strong>. Players and supporters are encouraged to arrive before <strong>7:30 AM</strong>.<br><br><strong>About this lineup</strong><br>The draw is fixed, so everyone opening this link sees the same teams. The pitch graphic is a visual 4-3-3-style arrangement for the starting XI only; it does not assign official playing positions. Team captains can confirm the actual positions before kickoff.</div></div>
+<div class="notice" style="margin-top:12px"><div class="notice-icon">⛪</div><div><strong>New Reality Christian Centre</strong><br>10 Trinity Avenue, Educational Estate, Samonda, Ibadan, Oyo State.<br><a class="directions-link" href="https://www.google.com/maps/search/?api=1&query=10+Trinity+Avenue%2C+Educational+Estate%2C+Samonda%2C+Ibadan%2C+Oyo+State" target="_blank" rel="noopener">Get directions to church ↗</a></div></div>
+<footer class="footer"><b>NRCC IBADAN</b> · APJ vs PFO · Fair draw. Great fellowship. Beautiful game. ⚽</footer></main><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+// Match time is set to West Africa Time (Nigeria, UTC+1).
+const kickoff = new Date('2026-10-24T08:00:00+01:00').getTime();
+function updateCountdown(){
+ const now=Date.now();
+ const remaining=kickoff-now;
+ const title=document.getElementById('countdown-title');
+ if(remaining<=0){
+   document.getElementById('days').textContent='00';
+   document.getElementById('hours').textContent='00';
+   document.getElementById('minutes').textContent='00';
+   document.getElementById('seconds').textContent='00';
+   title.textContent=remaining > -3*60*60*1000 ? 'Kick-off time is here!' : 'Match-day kick-off time has passed';
+   return;
+ }
+ const days=Math.floor(remaining/86400000);
+ const hours=Math.floor((remaining%86400000)/3600000);
+ const minutes=Math.floor((remaining%3600000)/60000);
+ const seconds=Math.floor((remaining%60000)/1000);
+ document.getElementById('days').textContent=String(days).padStart(2,'0');
+ document.getElementById('hours').textContent=String(hours).padStart(2,'0');
+ document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
+ document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
+ title.textContent='Countdown to kick-off';
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+const teams=[
+ {id:'apj',name:'TEAM APJ',squad:'Green Squad',manager:'PDA',numbers:[7,22,4,31,18,10,44,6,27,13,9,55,21,3,16],players:['Engr','Daniel','Tobiloba','Chinedu','David','Sapphire','Adebayo','Oluwafemi','General','Oluwaseun','Kayode','Francis','Temitayo','Oluwatobi','Mentor']},
+ {id:'pfo',name:'TEAM PFO',squad:'Blue Squad',manager:'PSA',numbers:[12,8,26,5,19,11,33,2,17,24,14,41,30,38,29],players:['Temitope','Segun','Dami','King','Emeka','Ifeanyi','Mbaifeanyi','Michael','Gbenga','Vinval','Ayomide','Kaylheb','Tochi','Oplomania','Dexol']}
+];
+const defaultSquads=teams.map(t=>({id:t.id,name:t.name,squad:t.squad,manager:t.manager,players:[...t.players],numbers:[...t.numbers]}));
+const positions=['GK','RB','RCB','LCB','LB','DM','RCM','LCM','RW','ST','LW'];
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initials=name=>String(name).trim().split(/\s+/).map(part=>part[0]||'').join('').slice(0,2).toUpperCase();
+const shirt=(team,index)=>{const name=team.players[index];const number=team.numbers[index];const pos=positions[index]||'SUB';return `<div class="player-token"><span class="player-avatar" aria-label="${escapeHtml(name)} avatar">${escapeHtml(initials(name))}</span><span>${escapeHtml(name)}</span><span class="jersey-number">#${number}</span><span class="pitch-position">${pos}</span></div>`};
+const pitch=(team)=>`<div class="pitch-wrap"><div class="pitch"><div class="half-line"></div><div class="box top"></div><div class="box bottom"></div><div class="formation"><div class="lineup-row">${[8,9,10].map(i=>shirt(team,i)).join('')}</div><div class="lineup-row row-mid">${[5,6,7].map(i=>shirt(team,i)).join('')}</div><div class="lineup-row row-back">${[1,2,3,4].map(i=>shirt(team,i)).join('')}</div><div class="lineup-row">${shirt(team,0)}</div></div></div></div>`;
+const playerRows=(team,indices,role='Starter')=>indices.map(i=>`<div class="player"><span class="num">${team.numbers[i]}</span><span class="player-name">${escapeHtml(team.players[i])}</span><span class="role">${role}</span></div>`).join('');
+function renderTeams(){
+ const teamsRoot=document.getElementById('teams');
+ teamsRoot.innerHTML=teams.map(t=>`<section class="team-card ${t.id==='pfo'?'pfo-card':''}"><div class="team-head ${t.id}"><div class="team-symbol">${t.id.toUpperCase()}</div><div><h3>${t.name}</h3><p>${t.squad} · ${t.players.length} players</p><div class="manager-line"><span>🤝 Team manager</span><b>${escapeHtml(t.manager)}</b></div></div><div class="squad-count">${t.players.length}<small>PLAYERS</small></div></div><div class="section-heading"><span>Starting XI · pitch view</span><span>4-3-3 formation</span></div>${pitch(t)}<div class="position-note">Player initials are used as lightweight avatars. Positions show an illustrative 4-3-3 formation; captains can confirm changes before kickoff.</div><div class="roster"><div class="section-heading"><span>Starting XI · squad list</span><span>Jersey numbers</span></div><div class="player-list">${playerRows(t,Array.from({length:Math.min(11,t.players.length)},(_,i)=>i))}</div><div class="sub-block"><div class="section-heading"><span>Substitutes</span><span>${Math.max(0,t.players.length-11)} players</span></div><div class="player-list">${playerRows(t,Array.from({length:Math.max(0,t.players.length-11)},(_,i)=>i+11),'Sub')}</div></div></div></section>`).join('');
+ document.querySelector('.stats').innerHTML=`<span class="stat">⚽ ${teams.reduce((n,t)=>n+t.players.length,0)} Players</span><span class="stat">👕 ${teams.reduce((n,t)=>n+Math.min(11,t.players.length),0)} Starters</span><span class="stat">🔁 ${teams.reduce((n,t)=>n+Math.max(0,t.players.length-11),0)} Subs</span>`;
+ allText=buildAllText();
+}
+function buildAllText(){return 'NRCC IBADAN · MATCH-DAY LINEUPS\nTEAM APJ vs TEAM PFO\nDate: Saturday, 24 October 2026\nKick-off: 8:00 AM WAT\nVenue: University of Ibadan Stadium, Ibadan\nArrival reminder: Please arrive before 7:30 AM.\n\n'+teams.map(t=>t.name+' — '+t.squad+'\nManager: '+t.manager+'\nSTARTING XI\n'+t.players.slice(0,11).map((p,i)=>'#'+t.numbers[i]+' '+p+' ('+(positions[i]||'SUB')+')').join('\n')+'\n\nSUBSTITUTES\n'+t.players.slice(11).map((p,i)=>'#'+t.numbers[i+11]+' '+p).join('\n')).join('\n\n------------------------\n\n')+'\n\nFormation is illustrative; captains can confirm playing positions.';}
+function fillSquadEditor(){
+ const apj=teams.find(t=>t.id==='apj'),pfo=teams.find(t=>t.id==='pfo');
+ if(!apj||!pfo)return;
+ document.getElementById('editSquadAPJ').value=apj.players.join('\n');document.getElementById('editSquadPFO').value=pfo.players.join('\n');
+ document.getElementById('editManagerAPJ').value=apj.manager;document.getElementById('editManagerPFO').value=pfo.manager;
+}
+let lastSquadSignature='';
+function applySavedSquads(saved){
+ if(!saved||typeof saved!=='object')return;
+ const signature=JSON.stringify(saved);
+ if(signature===lastSquadSignature)return;
+ lastSquadSignature=signature;
+ for(const id of ['apj','pfo']){
+  const incoming=saved[id];const team=teams.find(t=>t.id===id);
+  if(!team||!incoming||!Array.isArray(incoming.players))continue;
+  const players=incoming.players.map(n=>String(n||'').trim()).filter(Boolean).slice(0,30);
+  if(players.length)team.players=players;
+  if(typeof incoming.manager==='string'&&incoming.manager.trim())team.manager=incoming.manager.trim().slice(0,40);
+  const used=new Set();team.numbers=team.players.map((_,i)=>{let num=Number(incoming.numbers?.[i]??team.numbers[i]);if(!Number.isInteger(num)||num<1||num>99||used.has(num)){do{num=Math.floor(Math.random()*99)+1}while(used.has(num));}used.add(num);return num;});
+ }
+ renderTeams();fillSquadEditor();
+}
+let allText='';
+renderTeams();fillSquadEditor();
+window.nrccRenderTeams=renderTeams;window.nrccFillSquadEditor=fillSquadEditor;window.nrccApplySavedSquads=applySavedSquads;window.nrccGetSquadsPayload=()=>Object.fromEntries(teams.map(t=>[t.id,{players:[...t.players],numbers:[...t.numbers],manager:t.manager,squad:t.squad}]));window.nrccGetDefaultSquads=()=>Object.fromEntries(defaultSquads.map(t=>[t.id,{players:[...t.players],numbers:[...t.numbers],manager:t.manager,squad:t.squad}]));
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600)}
+document.getElementById('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(allText);toast('Team list copied. Paste it into WhatsApp.')}catch(e){window.prompt('Copy the team list below:',allText)}});
+document.getElementById('share').addEventListener('click',async()=>{try{if(navigator.share){await navigator.share({title:'NRCC Ibadan | APJ vs PFO Match Day',text:allText,url:location.href})}else{await navigator.clipboard.writeText(location.href+'\n\n'+allText);toast('Link and team list copied for WhatsApp.')}}catch(e){}});
+</script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, query, orderBy, serverTimestamp, runTransaction, deleteDoc, getDocs, writeBatch } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCCGYJNS0OcfqH7emwj-xKzEkLBlj99kpY",
+  authDomain: "nrcc-match-day.firebaseapp.com",
+  projectId: "nrcc-match-day",
+  storageBucket: "nrcc-match-day.firebasestorage.app",
+  messagingSenderId: "429940734698",
+  appId: "1:429940734698:web:1827be0ecd025a26f67593",
+  measurementId: "G-G0WV7KDLY8"
+};
+const ADMIN_UID = 'Lgn7v7G0d3UdivdoTTYp0VbdpMg2';
+const MATCH_ID = 'apj-pfo-2026';
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const matchRef = doc(db, 'matches', MATCH_ID);
+const eventsRef = collection(db, 'matches', MATCH_ID, 'events');
+const $ = id => document.getElementById(id);
+let isAdmin = false;
+let matchListenerStarted = false;
+let latestEvent = null;
+let allEvents = [];
+let currentMatchData = {};
+let reportSummaryData = null;
+const safeText = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function adminMessage(message, error=false){ const el=$('adminMessage'); el.textContent=message; el.classList.toggle('error',error); }
+function setConnection(message, good=false){ $('connectionState').textContent=message; $('connectionState').style.color=good?'#c9f36b':'#ffe2a8'; }
+function eventTeamId(ev){if(ev?.team==='apj'||ev?.teamId==='apj')return 'apj';if(ev?.team==='pfo'||ev?.teamId==='pfo')return 'pfo';const type=String(ev?.type||'');if(type.includes('Team APJ'))return 'apj';if(type.includes('Team PFO'))return 'pfo';return 'neutral';}
+function eventDate(ev){try{if(ev?.createdAt?.toDate)return ev.createdAt.toDate().toISOString();if(ev?.createdAt?.seconds)return new Date(ev.createdAt.seconds*1000).toISOString();if(ev?.createdAt)return new Date(ev.createdAt).toISOString();}catch{}return null;}
+function extractScorer(description){
+ const match=String(description||'').match(/goal\s+by\s+([^,;.]+)/i);
+ return match?match[1].trim():'';
+}
+function renderGoalScorers(){
+ const apjRoot=$('goalScorersAPJ'),pfoRoot=$('goalScorersPFO');
+ if(!apjRoot||!pfoRoot)return;
+ const goals=[...allEvents].filter(ev=>String(ev.type||'').toLowerCase().includes('goal'))
+   .sort((a,b)=>(eventDate(a)||'').localeCompare(eventDate(b)||''));
+ const renderTeam=(root,teamId)=>{
+   const teamGoals=goals.filter(ev=>eventTeamId(ev)===teamId);
+   if(!teamGoals.length){
+     root.innerHTML='<span class="goal-scorers-title">Goalscorers</span><span class="goal-scorers-empty">No goals recorded yet</span>';
+     return;
+   }
+   root.innerHTML='<span class="goal-scorers-title">Goalscorers</span>'+teamGoals.map(ev=>{
+     const scorer=String(ev.scorer||extractScorer(ev.description)||'Scorer not recorded');
+     return '<div class="goal-scorer-row"><span class="goal-scorer-name">'+safeText(scorer)+'</span><span class="goal-scorer-minute">'+safeText(ev.minute||'Goal')+'</span></div>';
+   }).join('');
+ };
+ renderTeam(apjRoot,'apj'); renderTeam(pfoRoot,'pfo');
+}
+function renderMatchReport(){
+ const root=$('reportSummary');if(!root)return;
+ const events=[...allEvents];const goals=events.filter(e=>String(e.type||'').toLowerCase().includes('goal'));
+ const apjGoals=goals.filter(e=>eventTeamId(e)==='apj').length;const pfoGoals=goals.filter(e=>eventTeamId(e)==='pfo').length;
+ const yellow=events.filter(e=>String(e.type||'').toLowerCase().includes('yellow card')).length;
+ const red=events.filter(e=>String(e.type||'').toLowerCase().includes('red card')).length;
+ const subs=events.filter(e=>String(e.type||'').toLowerCase().includes('substitution'));
+ const apjSubs=subs.filter(e=>eventTeamId(e)==='apj'||String(e.type||'').includes('TEAM APJ')).length;
+ const pfoSubs=subs.filter(e=>eventTeamId(e)==='pfo'||String(e.type||'').includes('TEAM PFO')).length;
+ const scoreA=Number(currentMatchData.scoreAPJ)||0,scoreP=Number(currentMatchData.scorePFO)||0;
+ const status=String(currentMatchData.status||'Scheduled');
+ const result=status==='Full Time'?(scoreA>scoreP?'Team APJ won':scoreP>scoreA?'Team PFO won':'Match ended in a draw'):(scoreA===scoreP?'Currently level':(scoreA>scoreP?'Team APJ leading':'Team PFO leading'));
+ const awards=Array.isArray(currentMatchData.awards)?currentMatchData.awards:[];
+ const suggestions=[];
+ if(yellow+red>=4)suggestions.push('Review discipline and team communication: the match logged '+(yellow+red)+' card events.');
+ if(red>0)suggestions.push('Review the red-card incident(s), decision-making and how the team adapted after dismissal.');
+ if(subs.length===0&&status==='Full Time')suggestions.push('No substitutions were logged. Review bench use, fatigue and tactical flexibility.');
+ if(apjGoals+pfoGoals===0&&status==='Full Time')suggestions.push('No goal events were logged. Confirm the score and review attacking chances before drawing performance conclusions.');
+ if(subs.length>0)suggestions.push('Review substitution timing and subsequent match events to assess whether changes improved control or attacking threat.');
+ if(!suggestions.length)suggestions.push('Keep recording goal scorers, assists, cards, substitutions and key chances. More complete event data will make future performance reviews more useful.');
+ reportSummaryData={reportVersion:1,matchId:MATCH_ID,match:'NRCC Ibadan: Team APJ vs Team PFO',venue:'University of Ibadan Stadium, Ibadan',scheduledKickoff:'2026-10-24T08:00:00+01:00',generatedAt:new Date().toISOString(),status,minute:currentMatchData.minute||'Before kickoff',score:{APJ:scoreA,PFO:scoreP},result,stats:{totalEvents:events.length,goalEvents:goals.length,APJGoalEvents:apjGoals,PFOGoalEvents:pfoGoals,yellowCards:yellow,redCards:red,totalSubstitutions:subs.length,APJSubstitutions:apjSubs,PFOSubstitutions:pfoSubs,awardsPublished:awards.length},awards,teams:window.nrccGetSquadsPayload?.()||{},events:events.map(e=>({id:e.id,minute:e.minute||'',type:e.type||'Match update',team:eventTeamId(e),description:e.description||'',playerOff:e.playerOff||null,playerOn:e.playerOn||null,createdAt:eventDate(e)})),improvementPrompts:suggestions};
+ $('reportState').textContent=status==='Full Time'?'FULL-TIME REPORT':'LIVE SUMMARY';
+ root.innerHTML=`<article class="award-card"><div class="award-label">Current result</div><h4>APJ ${scoreA} – ${scoreP} PFO</h4><p>${safeText(result)} · ${safeText(status)} · ${safeText(currentMatchData.minute||'Before kickoff')}</p></article><article class="award-card"><div class="award-label">Goal record</div><h4>APJ ${apjGoals} · PFO ${pfoGoals}</h4><p>Goals attributed from the event log. Compare this with the scoreboard to catch missing or duplicated goal entries.</p></article><article class="award-card"><div class="award-label">Discipline</div><h4>${yellow} yellow · ${red} red</h4><p>Cards recorded in the timeline. Add a player's name and reason to each card description for deeper analysis.</p></article><article class="award-card"><div class="award-label">Substitution review</div><h4>${subs.length} total</h4><p>APJ: ${apjSubs} · PFO: ${pfoSubs}. Include a reason and impact in the event description to support tactical reviews.</p></article><article class="award-card"><div class="award-label">Match activity</div><h4>${events.length} events · ${awards.length} awards</h4><p>The report includes the full timeline, published awards, squads and timestamps.</p></article><article class="award-card"><div class="award-label">Improvement prompts</div><h4>What to review next</h4><p>${suggestions.map(safeText).join('<br><br>')}</p></article>`;
+}
+function downloadBlob(filename,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+$('downloadReport').addEventListener('click',()=>{renderMatchReport();downloadBlob('nrcc-match-report-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(reportSummaryData||{},null,2),'application/json');});
+$('downloadReportCSV').addEventListener('click',()=>{const rows=[['minute','type','team','description','playerOff','playerOn','createdAt'],...(reportSummaryData?.events||[]).map(e=>[e.minute,e.type,e.team,e.description,e.playerOff||'',e.playerOn||'',e.createdAt||''])];const csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');downloadBlob('nrcc-match-events-'+new Date().toISOString().slice(0,10)+'.csv',csv,'text/csv;charset=utf-8');});
+$('archiveReport').addEventListener('click',async()=>{if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account to archive reports.',true);return;}try{renderMatchReport();const archiveRef=collection(db,'matches',MATCH_ID,'reports');const report={...(reportSummaryData||{}),archivedAt:new Date().toISOString(),archivedBy:auth.currentUser.uid};const saved=await addDoc(archiveRef,report);adminMessage('Match report archived in Firebase successfully. Archive ID: '+saved.id+'. Master clean will not delete archived reports.');}catch(e){adminMessage('Could not archive report. Check Firestore create permissions for the reports subcollection: '+e.message,true);}});
+$('adminToggle').addEventListener('click',()=>{ const open=$('adminBody').classList.toggle('open'); $('adminToggle').setAttribute('aria-expanded',String(open)); });
+function startMatchListener(){
+  if(matchListenerStarted) return; matchListenerStarted=true;
+  onSnapshot(matchRef, snap=>{
+    setConnection('● LIVE SYNC',true);
+    const d=snap.exists()?snap.data():{}; currentMatchData=d;
+    if(d.squads && window.nrccApplySavedSquads) window.nrccApplySavedSquads(d.squads);
+    renderAwards(Array.isArray(d.awards)?d.awards:[]);
+    const a=Number.isFinite(Number(d.scoreAPJ))?Number(d.scoreAPJ):0;
+    const b=Number.isFinite(Number(d.scorePFO))?Number(d.scorePFO):0;
+    $('scoreAPJ').textContent=String(a); $('scorePFO').textContent=String(b);
+    const status=String(d.status||'Scheduled'); const minute=String(d.minute||'Before kickoff');
+    $('matchStatus').textContent=status.toUpperCase(); $('matchMinute').textContent=minute;
+    $('matchStatus').classList.toggle('status-live',['First Half','Second Half'].includes(status));
+    $('matchStatus').classList.toggle('status-finished',status==='Full Time');
+    if(isAdmin){ $('editAPJ').value=a; $('editPFO').value=b; $('editStatus').value=status; $('editMinute').value=(minute==='Before kickoff'?'':minute); }
+    renderMatchReport();
+  },err=>{ setConnection('SYNC ERROR'); console.error('Match listener:',err); $('eventList').innerHTML='<p class="empty-events">Live connection failed. Check Firebase configuration and Firestore rules.</p>'; });
+  const q=query(eventsRef,orderBy('createdAt','desc'));
+  onSnapshot(q,snap=>{
+    const items=[]; snap.forEach(docSnap=>items.push({id:docSnap.id,...docSnap.data()}));
+    allEvents=items; latestEvent=items[0]||null;
+    renderGoalScorers();
+    if($('undoEvent'))$('undoEvent').disabled=!isAdmin||!latestEvent;
+    $('eventList').innerHTML=items.length?items.map(ev=>{const tid=eventTeamId(ev);const teamBadge=tid==='apj'?'TEAM APJ':tid==='pfo'?'TEAM PFO':'';return `<div class="event-item"><span class="event-minute">${safeText(ev.minute||'INFO')}</span><div class="event-text"><strong>${safeText(ev.type||'Match update')}${teamBadge?' · '+teamBadge:''}</strong>${ev.description?'<br>'+safeText(ev.description):''}</div></div>`}).join(''):'<p class="empty-events">Match events will appear here when the admin adds them.</p>';
+    renderMatchReport();
+  },err=>{ console.error('Events listener:',err); $('eventList').innerHTML='<p class="empty-events">The match timeline is temporarily unavailable. Check Firestore rules.</p>'; $('reportState').textContent='REPORT WAITING'; });
+}
+renderGoalScorers();
+startMatchListener();
+refreshSubstitutionOptions();
+onAuthStateChanged(auth,user=>{
+  isAdmin=!!user && user.uid===ADMIN_UID;
+  if(isAdmin){ $('loginPanel').classList.add('admin-hidden'); $('controlsPanel').classList.remove('admin-hidden'); if(window.nrccFillSquadEditor)window.nrccFillSquadEditor(); refreshSubstitutionOptions(); $('adminIdentity').textContent='Signed in as authorized administrator · '+user.email; $('adminToggle').textContent='🔐 ADMIN CONTROL ROOM · Signed in'; if($('undoEvent'))$('undoEvent').disabled=!latestEvent; adminMessage('Admin access verified. Changes will sync live.'); }
+  else { $('loginPanel').classList.remove('admin-hidden'); $('controlsPanel').classList.add('admin-hidden'); $('adminToggle').textContent='🔐 ADMIN CONTROL ROOM · Sign in'; if(user && user.uid!==ADMIN_UID){ adminMessage('This account is not authorized to administer this match.',true); } }
+});
+$('loginButton').addEventListener('click',async()=>{
+  const email=$('adminEmail').value.trim(), password=$('adminPassword').value;
+  if(!email||!password){adminMessage('Enter your administrator email and password.',true);return;}
+  $('loginButton').disabled=true;
+  try { const result=await signInWithEmailAndPassword(auth,email,password); if(result.user.uid!==ADMIN_UID){await signOut(auth);throw new Error('This account is not authorized for the admin dashboard. Use the Firebase user whose UID is authorized in Firestore rules.');} $('adminPassword').value=''; adminMessage('Signed in successfully.'); }
+  catch(e){adminMessage(e.code==='auth/invalid-credential'?'Sign-in failed. Check the email and password and try again.':(e.message||'Sign-in failed.'),true);}
+  finally{$('loginButton').disabled=false;}
+});
+$('signOutButton').addEventListener('click',async()=>{try{await signOut(auth);adminMessage('Signed out successfully.');}catch(e){adminMessage(e.message,true);}});
+async function saveScoreState({scoreAPJ,scorePFO,status,minute,source='manual',sourceEventId=null}){
+  await runTransaction(db,async tx=>{
+    const snap=await tx.get(matchRef);const old=snap.exists()?snap.data():{};
+    const history=Array.isArray(old.scoreHistory)?old.scoreHistory.slice(-19):[];
+    history.push({scoreAPJ:Number(old.scoreAPJ)||0,scorePFO:Number(old.scorePFO)||0,status:String(old.status||'Scheduled'),minute:String(old.minute||'Before kickoff'),savedAt:new Date().toISOString(),source,sourceEventId});
+    tx.set(matchRef,{teamAPJ:'TEAM APJ',teamPFO:'TEAM PFO',scoreAPJ,scorePFO,status,minute,scoreHistory:history,updatedAt:serverTimestamp(),updatedBy:auth.currentUser.uid},{merge:true});
+  });
+}
+$('saveScore').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  const scoreAPJ=Number($('editAPJ').value),scorePFO=Number($('editPFO').value),status=$('editStatus').value,minute=$('editMinute').value.trim()||'Before kickoff';
+  if(!Number.isInteger(scoreAPJ)||!Number.isInteger(scorePFO)||scoreAPJ<0||scorePFO<0||scoreAPJ>99||scorePFO>99){adminMessage('Scores must be whole numbers from 0 to 99.',true);return;}
+  $('saveScore').disabled=true;
+  try{await saveScoreState({scoreAPJ,scorePFO,status,minute});adminMessage('Scoreboard saved. APJ and PFO scores are stored separately and sync live.');}
+  catch(e){adminMessage('Could not save scoreboard: '+e.message,true);}
+  finally{$('saveScore').disabled=false;}
+});
+$('undoScore').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  $('undoScore').disabled=true;
+  try{
+    let restored=false;
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(matchRef);if(!snap.exists())throw new Error('There is no saved scoreboard history to undo.');
+      const d=snap.data(),history=Array.isArray(d.scoreHistory)?d.scoreHistory.slice():[];
+      if(!history.length)throw new Error('There is no previous score change to undo.');
+      const previous=history.pop();
+      tx.set(matchRef,{scoreAPJ:Number(previous.scoreAPJ)||0,scorePFO:Number(previous.scorePFO)||0,status:previous.status||'Scheduled',minute:previous.minute||'Before kickoff',scoreHistory:history,updatedAt:serverTimestamp(),updatedBy:auth.currentUser.uid,lastUndoAt:new Date().toISOString()},{merge:true});restored=true;
+    });
+    if(restored)adminMessage('Undo complete. The previous scoreboard, match status and minute have been restored.');
+  }catch(e){adminMessage('Could not undo score: '+e.message,true);}
+  finally{$('undoScore').disabled=false;}
+});
+$('addEvent').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  const minute=$('eventMinute').value.trim()||'INFO';let type=$('eventType').value;const description=$('eventDescription').value.trim();const scorer=$('goalScorer').value.trim();
+  let teamId=$('eventTeam').value;
+  if(type==='Goal · Team APJ')teamId='apj';else if(type==='Goal · Team PFO')teamId='pfo';
+  const isGoal=type==='Goal'||type==='Goal · Team APJ'||type==='Goal · Team PFO';
+  if(!description&&!isGoal){adminMessage('Add a short event description before publishing.',true);return;}
+  if(isGoal&&teamId==='neutral'){adminMessage('Choose Team APJ or Team PFO for a goal so it is added to the correct side.',true);return;}
+  if(isGoal&&!scorer){adminMessage('Enter the goalscorer name so it appears under the correct team on the scoreboard.',true);return;}
+  if(isGoal)type='Goal · Team '+(teamId==='apj'?'APJ':'PFO');
+  try{
+    if(isGoal){
+      const eventRef=doc(eventsRef);
+      await runTransaction(db,async tx=>{
+        const snap=await tx.get(matchRef);const d=snap.exists()?snap.data():{};const history=Array.isArray(d.scoreHistory)?d.scoreHistory.slice(-19):[];
+        const a=Number(d.scoreAPJ)||0,b=Number(d.scorePFO)||0;
+        history.push({scoreAPJ:a,scorePFO:b,status:d.status||'First Half',minute:d.minute||minute,savedAt:new Date().toISOString(),source:'goal-event',sourceEventId:eventRef.id});
+        const nextAPJ=a+(teamId==='apj'?1:0),nextPFO=b+(teamId==='pfo'?1:0);
+        tx.set(matchRef,{teamAPJ:'TEAM APJ',teamPFO:'TEAM PFO',scoreAPJ:nextAPJ,scorePFO:nextPFO,status:['Scheduled',''].includes(d.status||'Scheduled')?'First Half':(d.status||'First Half'),minute,scoreHistory:history,updatedAt:serverTimestamp(),updatedBy:auth.currentUser.uid},{merge:true});
+        const goalDescription=description||(`Goal by ${scorer}`);
+        tx.set(eventRef,{minute,type,team:teamId,teamId,teamLabel:teamId==='apj'?'TEAM APJ':'TEAM PFO',scorer,description:goalDescription,createdAt:serverTimestamp(),createdBy:auth.currentUser.uid,scoreChange:true,scoreAfter:{APJ:nextAPJ,PFO:nextPFO}});
+      });
+      adminMessage((teamId==='apj'?'Team APJ':'Team PFO')+' goal recorded. The matching team score increased; the opposing score was left unchanged.');
+    }else{
+      const eventTeam=teamId==='neutral'?'neutral':teamId;
+      await addDoc(eventsRef,{minute,type,team:eventTeam,teamId:eventTeam,teamLabel:eventTeam==='apj'?'TEAM APJ':eventTeam==='pfo'?'TEAM PFO':'NRCC MATCH DAY',description,createdAt:serverTimestamp(),createdBy:auth.currentUser.uid});
+      adminMessage('Match event published to the live timeline with team attribution.');
+    }
+    $('eventMinute').value='';$('eventDescription').value='';$('goalScorer').value='';
+  }catch(e){adminMessage('Could not publish event: '+e.message,true);}
+});
+$('undoEvent').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  if(!latestEvent){adminMessage('There is no recent event to undo.',true);return;}
+  if(!confirm('Remove the latest match timeline event? If it was a goal entered through this form and is still the latest score change, its score will also be restored.'))return;
+  const ev=latestEvent;$('undoEvent').disabled=true;
+  try{
+    if(ev.scoreChange){
+      await runTransaction(db,async tx=>{
+        const snap=await tx.get(matchRef);if(!snap.exists())return;const d=snap.data(),history=Array.isArray(d.scoreHistory)?d.scoreHistory.slice():[];const last=history[history.length-1];
+        if(last&&last.sourceEventId===ev.id){history.pop();tx.set(matchRef,{scoreAPJ:Number(last.scoreAPJ)||0,scorePFO:Number(last.scorePFO)||0,status:last.status||'Scheduled',minute:last.minute||'Before kickoff',scoreHistory:history,updatedAt:serverTimestamp(),updatedBy:auth.currentUser.uid},{merge:true});}
+      });
+    }
+    await deleteDoc(doc(eventsRef,ev.id));adminMessage('The latest timeline event was removed. If it was the most recent goal score change, the score was also restored.');
+  }catch(e){adminMessage('Could not undo the event. Check Firestore delete permissions: '+e.message,true);}
+});
+function refreshSubstitutionOptions(){
+  const teamId=$('subTeam')?.value||'apj';const team=window.nrccGetSquadsPayload?.()[teamId];if(!team)return;
+  const off=$('subPlayerOff'),on=$('subPlayerOn');if(!off||!on)return;
+  const previousOff=off.value,previousOn=on.value;
+  off.innerHTML=team.players.slice(0,11).map((name,i)=>`<option value="${safeText(name)}">${safeText(name)} · #${safeText(team.numbers?.[i]||'')}</option>`).join('');
+  on.innerHTML=team.players.slice(11).map((name,i)=>`<option value="${safeText(name)}">${safeText(name)} · #${safeText(team.numbers?.[i+11]||'')}</option>`).join('');
+  if([...off.options].some(o=>o.value===previousOff))off.value=previousOff;if([...on.options].some(o=>o.value===previousOn))on.value=previousOn;
+}
+$('subTeam').addEventListener('change',refreshSubstitutionOptions);
+$('publishSubstitution').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  const teamId=$('subTeam').value,teamLabel=teamId==='apj'?'TEAM APJ':'TEAM PFO',off=$('subPlayerOff').value,on=$('subPlayerOn').value,minute=$('subMinute').value.trim()||$('editMinute').value.trim()||'SUB';
+  if(!off||!on){adminMessage('Choose a player coming off and a substitute coming on.',true);return;}
+  if(off===on){adminMessage('The incoming and outgoing players must be different.',true);return;}
+  try{await addDoc(eventsRef,{minute,type:'Substitution · '+teamLabel,description:`${teamLabel}: ${off} ⬇️ OFF  |  ${on} ⬆️ ON`,team:teamId,playerOff:off,playerOn:on,createdAt:serverTimestamp(),createdBy:auth.currentUser.uid});$('subMinute').value='';adminMessage(`Substitution published for ${teamLabel}: ${off} off, ${on} on.`);}
+  catch(e){adminMessage('Could not publish substitution: '+e.message,true);}
+});
+function renderAwards(awards){
+ const root=$('awardList');if(!root)return;
+ if(!awards.length){root.innerHTML='<div class="award-card"><div class="award-label">Match-day honours</div><h4>Awards will appear here</h4><p>The match administrators will publish individual award winners during or after the game.</p></div>';return;}
+ const sorted=[...awards].sort((a,b)=>String(a.category||'').localeCompare(String(b.category||'')));
+ root.innerHTML=sorted.map(a=>`<article class="award-card"><div class="award-label">🏅 ${safeText(a.category||'Individual award')}</div><h4>${safeText(a.winner||'Winner to be announced')}</h4><p>${safeText(a.citation||'Recognised for an outstanding match-day contribution.')}</p><span class="award-team">${safeText(a.teamLabel||'NRCC MATCH DAY')}</span></article>`).join('');
+}
+$('publishAward').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  const category=$('awardCategory').value,teamId=$('awardTeam').value,winner=$('awardWinner').value.trim(),citation=$('awardCitation').value.trim();
+  if(!winner){adminMessage('Enter the name of the award winner.',true);return;}
+  const teamLabel=teamId==='apj'?'TEAM APJ':teamId==='pfo'?'TEAM PFO':'NRCC MATCH DAY';
+  try{
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(matchRef);const d=snap.exists()?snap.data():{};const awards=Array.isArray(d.awards)?d.awards.slice():[];
+      const next={category,teamId,teamLabel,winner,citation,updatedAt:new Date().toISOString(),updatedBy:auth.currentUser.uid};
+      const index=awards.findIndex(a=>a.category===category);if(index>=0)awards[index]=next;else awards.push(next);
+      tx.set(matchRef,{awards,awardsUpdatedAt:serverTimestamp(),awardsUpdatedBy:auth.currentUser.uid},{merge:true});
+    });
+    $('awardWinner').value='';$('awardCitation').value='';adminMessage(`${category} published for ${winner}. The public awards board will update live.`);
+  }catch(e){adminMessage('Could not publish award: '+e.message,true);}
+});
+$('masterReset').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  const resetSquads=$('resetSquadsToo').checked;
+  if(!confirm('MASTER CLEAN will clear the scoreboard, match timeline, awards and undo history for ALL visitors. '+(resetSquads?'It will ALSO restore the original squad lists and managers.':'Saved squads will be preserved.')+' Export your report first if you need a copy. Continue?'))return;
+  const confirmation=prompt('For safety, type RESET MATCH to confirm the master clean:');
+  if(confirmation!=='RESET MATCH'){adminMessage('Master clean cancelled. Nothing was cleared.');return;}
+  const button=$('masterReset');button.disabled=true;
+  try{
+    const snapshot=await getDocs(eventsRef);let deleted=0;
+    const docs=snapshot.docs;
+    for(let i=0;i<docs.length;i+=400){const batch=writeBatch(db);docs.slice(i,i+400).forEach(d=>batch.delete(d.ref));await batch.commit();deleted+=docs.slice(i,i+400).length;}
+    const resetData={teamAPJ:'TEAM APJ',teamPFO:'TEAM PFO',scoreAPJ:0,scorePFO:0,status:'Scheduled',minute:'Before kickoff',scoreHistory:[],awards:[],updatedAt:serverTimestamp(),updatedBy:auth.currentUser.uid,lastMasterResetAt:serverTimestamp(),lastMasterResetBy:auth.currentUser.uid,resetEventCount:deleted};
+    if(resetSquads&&window.nrccGetDefaultSquads)resetData.squads=window.nrccGetDefaultSquads();
+    await setDoc(matchRef,resetData,{merge:true});
+    if(resetSquads&&window.nrccApplySavedSquads)window.nrccApplySavedSquads(resetData.squads);
+    $('editAPJ').value='0';$('editPFO').value='0';$('editStatus').value='Scheduled';$('editMinute').value='';
+    if(resetSquads&&window.nrccFillSquadEditor)window.nrccFillSquadEditor();
+    $('resetSquadsToo').checked=false;refreshSubstitutionOptions();renderMatchReport();
+    adminMessage(`Master clean complete. Scoreboard reset, ${deleted} timeline event(s) cleared, awards and undo history cleared${resetSquads?', and original squads restored':', while saved squads were preserved'}.`);
+  }catch(e){adminMessage('Master clean did not finish completely. Check Firestore read/delete/write permissions, then review the board before retrying: '+e.message,true);}
+  finally{button.disabled=false;}
+});
+$('reloadSquads').addEventListener('click',()=>{if(window.nrccFillSquadEditor)window.nrccFillSquadEditor();adminMessage('Squad editor reloaded from the latest squad data shown on this page.');});
+$('saveSquads').addEventListener('click',async()=>{
+  if(!isAdmin||!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){adminMessage('Sign in with the authorized administrator account first.',true);return;}
+  const parsePlayers=id=>$(id).value.split(/\r?\n/).map(n=>n.trim()).filter(Boolean);
+  const apjPlayers=parsePlayers('editSquadAPJ'),pfoPlayers=parsePlayers('editSquadPFO');
+  if(apjPlayers.length!==15||pfoPlayers.length!==15){adminMessage('Please enter exactly 15 non-empty player names for each team: 11 starters followed by 4 substitutes.',true);return;}
+  const apjManager=$('editManagerAPJ').value.trim(),pfoManager=$('editManagerPFO').value.trim();
+  if(!apjManager||!pfoManager){adminMessage('Please enter a manager name for both teams.',true);return;}
+  const current=window.nrccGetSquadsPayload();
+  const payload={
+    apj:{...current.apj,players:apjPlayers,manager:apjManager},
+    pfo:{...current.pfo,players:pfoPlayers,manager:pfoManager}
+  };
+  $('saveSquads').disabled=true;
+  try{
+    await setDoc(matchRef,{squads:payload,squadsUpdatedAt:serverTimestamp(),squadsUpdatedBy:auth.currentUser.uid},{merge:true});
+    window.nrccApplySavedSquads(payload); refreshSubstitutionOptions();
+    adminMessage('Squads saved to Firebase. Updated lineups will appear for everyone viewing the website.');
+  }catch(e){adminMessage('Could not save squads: '+e.message,true);}
+  finally{$('saveSquads').disabled=false;}
+});
+</script>
+
+</body></html>
