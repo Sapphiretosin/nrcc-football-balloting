@@ -33,6 +33,58 @@ main{padding:23px 0 34px}.summary{display:flex;align-items:center;justify-conten
 .goal-scorers-empty { color:rgba(255,255,255,.62); font-size:11px; }
 @media (max-width:540px) { .goal-scorers { font-size:11px; } .goal-scorer-row { align-items:flex-start; } }
 
+
+/* Match-day update: APJ red, PFO blue, with an interactive tactical visualiser. */
+.club.apj .mini-crest,.team-head.apj{background:linear-gradient(115deg,#8f1022,#e3263e)!important}
+.club.apj .mini-crest{background:linear-gradient(135deg,#e3263e,#8f1022)!important}
+.team-head.pfo{background:linear-gradient(115deg,#153e89,#2d6fe5)!important}
+.apj-card .shirt,.apj-card .player-avatar{background:linear-gradient(145deg,#ff6877,#bd132b)!important;color:#fff!important;border-color:#ffb5bd}
+.apj-card .jersey-number{background:#8f1022!important}
+.apj-card .num{background:#ffeaed!important;color:#a31529!important}
+.pfo-card .shirt,.pfo-card .player-avatar{background:linear-gradient(145deg,#8ab8ff,#174bb1)!important;color:#fff!important;border-color:#c2d9ff}
+.match-graphics{margin:0 0 18px;border-top:1px solid var(--line);padding:18px;background:linear-gradient(180deg,#f7faf7,#fff)}
+.graphics-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.graphics-kicker{font-size:9px;font-weight:1000;letter-spacing:1.7px;color:#638071}
+.graphics-heading h3{font-size:18px;margin:5px 0 4px;color:#153f2e}
+.graphics-heading p{font-size:11px;color:#6c7b72;margin:0}
+.graphics-live-dot{font-size:9px;letter-spacing:.8px;font-weight:1000;border-radius:999px;padding:7px 9px;background:#e9f5eb;color:#187449}
+.graphics-controls{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0 12px}
+.graphics-team,.graphics-play{min-height:42px;padding:9px 12px;border:1px solid #dce7dd;border-radius:11px;background:#fff;color:#315243;font:850 11px system-ui;cursor:pointer}
+.graphics-team.active{background:#122c22;color:#fff;border-color:#122c22}
+.graphics-play{background:#f5c85d;border-color:#f5c85d;color:#31230a;margin-left:auto}
+.visual-pitch{position:relative;isolation:isolate;overflow:hidden;min-height:430px;border:2px solid #e8f7ec;border-radius:15px;background:repeating-linear-gradient(0deg,#187a4c 0,#187a4c 42px,#146e43 42px,#146e43 84px)}
+.visual-pitch:before{content:"";position:absolute;inset:10px;border:1px solid #ffffff9c;border-radius:7px;pointer-events:none}
+.visual-pitch-lines{position:absolute;inset:0;pointer-events:none}
+.vp-center-line{position:absolute;left:10px;right:10px;top:50%;border-top:1px solid #ffffff9c}
+.vp-center-circle{position:absolute;left:50%;top:50%;width:82px;height:82px;transform:translate(-50%,-50%);border:1px solid #ffffff9c;border-radius:50%}
+.vp-box{position:absolute;left:50%;transform:translateX(-50%);width:42%;height:38px;border:1px solid #ffffff9c}
+.vp-box-top{top:10px;border-top:0}.vp-box-bottom{bottom:10px;border-bottom:0}
+.visual-formation{position:absolute;inset:0;z-index:2;transition:opacity .22s ease}
+.pitch-player{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:29px;height:29px;border:2px solid #fff;border-radius:9px 9px 7px 7px;box-shadow:0 3px 7px #052b1d66;display:grid;place-items:center;font:1000 10px system-ui;cursor:pointer;transition:transform .18s,box-shadow .18s;touch-action:manipulation}
+.pitch-player:focus-visible{outline:3px solid #ffe07a;outline-offset:3px}
+.pitch-player:hover,.pitch-player.selected{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 4px #ffffff7d,0 4px 10px #052b1d66}
+.formation-red .pitch-player{background:#d91f3a;color:#fff}
+.formation-blue .pitch-player{background:#2365d7;color:#fff}
+.pitch-player.keeper{border-radius:50%;background:#f4ca57!important;color:#172a20!important}
+.visual-pitch[data-highlight="apj"] .formation-blue{opacity:.28}
+.visual-pitch[data-highlight="pfo"] .formation-red{opacity:.28}
+.pitch-ball-path{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;opacity:0}
+.attack-path{fill:none;stroke:#fff6a8;stroke-width:1.1;stroke-dasharray:3 2}
+.moving-ball{fill:#fff;stroke:#17291e;stroke-width:.7}
+.visual-pitch.animate-attack .pitch-ball-path{opacity:1}
+.visual-pitch.animate-attack .moving-ball{animation:ballRun 1.9s ease-in-out both}
+.visual-pitch.animate-attack .attack-path{animation:pathDraw 1.9s ease-in-out both}
+@keyframes ballRun{0%{cx:50%;cy:83%;r:1.2}50%{cx:42%;cy:50%;r:2.8}100%{cx:54%;cy:17%;r:1.8}}
+@keyframes pathDraw{from{stroke-dashoffset:80}to{stroke-dashoffset:0}}
+.pitch-detail{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;padding:11px 2px 0;font-size:11px;color:#64756a;line-height:1.5}
+.pitch-detail strong{color:#173d2b}
+.graphics-footnote{font-size:10px;color:#7b8a80;line-height:1.5;margin-top:9px}
+.score-number{transition:transform .2s}
+.score-number.score-pop{animation:scorePop .55s ease}
+@keyframes scorePop{0%{transform:scale(1);text-shadow:none}35%{transform:scale(1.2);text-shadow:0 0 22px #f6cb69}100%{transform:scale(1);text-shadow:none}}
+@media(max-width:540px){.match-graphics{padding:14px}.visual-pitch{min-height:390px}.graphics-play{margin-left:0}.graphics-controls{gap:6px}.graphics-team,.graphics-play{flex:1;justify-content:center}.pitch-detail{display:block}.pitch-detail span{display:block;margin-top:3px}}
+@media(prefers-reduced-motion:reduce){.visual-formation,.pitch-player,.score-number{transition:none}.visual-pitch.animate-attack .moving-ball,.visual-pitch.animate-attack .attack-path,.score-number.score-pop{animation:none}}
+
 </style>
 </head>
 <body>
@@ -40,7 +92,7 @@ main{padding:23px 0 34px}.summary{display:flex;align-items:center;justify-conten
 <div class="topline"><div class="crest"><img src="images/nrcc-logo.png" alt="New Reality Christian Centre logo" onerror="this.style.display='none';this.parentElement.classList.add('logo-missing')"></div><div class="brandtext">NRCC IBADAN<strong>Football Fellowship</strong></div><div class="live">● MATCH DAY</div></div>
 <div class="hero-title"><div class="kicker">The official team announcement</div><h1>THE BEAUTIFUL<br><span>GAME.</span></h1><p class="subtitle">One fellowship. Two squads. One beautiful game.</p></div>
 <div class="match-details" aria-label="Match date, time and venue">
-<div class="detail-card"><span class="detail-label">Match date</span><strong>Saturday, 14 November 2026</strong></div>
+<div class="detail-card"><span class="detail-label">Match date</span><strong>Saturday, 31 October 2026</strong></div>
 <div class="detail-card"><span class="detail-label">Kick-off</span><strong>8:00 AM WAT</strong></div>
 <div class="detail-card"><span class="detail-label">Venue</span><strong>University of Ibadan Stadium</strong></div>
 <div class="countdown-card"><div class="countdown-title" id="countdown-title">Countdown to kick-off</div><div class="countdown" id="countdown" aria-live="polite"><div class="time-unit"><strong id="days">--</strong><span>DAYS</span></div><div class="time-unit"><strong id="hours">--</strong><span>HOURS</span></div><div class="time-unit"><strong id="minutes">--</strong><span>MINUTES</span></div><div class="time-unit"><strong id="seconds">--</strong><span>SECONDS</span></div></div><div class="arrival-note">PLEASE ARRIVE BEFORE 7:30 AM</div></div>
@@ -56,7 +108,47 @@ main{padding:23px 0 34px}.summary{display:flex;align-items:center;justify-conten
     <div class="score-separator">LIVE SCORE</div>
     <div class="score-team pfo-score"><div class="score-number" id="scorePFO">0</div><div class="goal-scorers" id="goalScorersPFO" aria-live="polite"><span class="goal-scorers-title">Goalscorers</span><span class="goal-scorers-empty">No goals recorded yet</span></div></div>
   </div>
-  <div class="match-meta"><span class="match-chip" id="matchStatus">SCHEDULED</span><span class="match-chip" id="matchMinute">Before kickoff</span><span class="match-chip">📍 University of Ibadan Stadium</span><span class="match-chip">🗓 Saturday, 14 November 2026 · 8:00 AM WAT</span></div>
+  <section class="match-graphics" aria-label="Interactive match graphics">
+    <div class="graphics-heading"><div><span class="graphics-kicker">TACTICAL VIEW</span><h3>Match visualiser</h3><p>Explore the pitch and animate a sample attack.</p></div><span class="graphics-live-dot">● LIVE GRAPHICS</span></div>
+    <div class="graphics-controls" role="group" aria-label="Choose team to highlight">
+      <button type="button" class="graphics-team active" data-team="apj" aria-pressed="true">🔴 Team APJ</button>
+      <button type="button" class="graphics-team" data-team="pfo" aria-pressed="false">🔵 Team PFO</button>
+      <button type="button" class="graphics-play" id="animateAttack">▶ Animate attack</button>
+    </div>
+    <div class="visual-pitch" id="visualPitch" data-highlight="apj">
+      <div class="visual-pitch-lines"><span class="vp-center-line"></span><span class="vp-center-circle"></span><span class="vp-box vp-box-top"></span><span class="vp-box vp-box-bottom"></span></div>
+      <svg class="pitch-ball-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 83 Q24 65 42 50 T54 17" class="attack-path"></path><circle class="moving-ball" cx="50" cy="83" r="2.1"></circle></svg>
+      <div class="visual-formation formation-red" aria-label="Illustrative Team APJ formation">
+        <button type="button" class="pitch-player" style="--x:50%;--y:12%" data-player="APJ forward" aria-label="Select APJ forward">9</button>
+        <button type="button" class="pitch-player" style="--x:30%;--y:28%" data-player="APJ attacker" aria-label="Select APJ attacker">7</button>
+        <button type="button" class="pitch-player" style="--x:70%;--y:28%" data-player="APJ attacker" aria-label="Select APJ attacker">11</button>
+        <button type="button" class="pitch-player" style="--x:50%;--y:42%" data-player="APJ midfielder" aria-label="Select APJ midfielder">8</button>
+        <button type="button" class="pitch-player" style="--x:25%;--y:51%" data-player="APJ midfielder" aria-label="Select APJ midfielder">6</button>
+        <button type="button" class="pitch-player" style="--x:75%;--y:51%" data-player="APJ midfielder" aria-label="Select APJ midfielder">10</button>
+        <button type="button" class="pitch-player" style="--x:15%;--y:69%" data-player="APJ defender" aria-label="Select APJ defender">3</button>
+        <button type="button" class="pitch-player" style="--x:38%;--y:73%" data-player="APJ defender" aria-label="Select APJ defender">4</button>
+        <button type="button" class="pitch-player" style="--x:62%;--y:73%" data-player="APJ defender" aria-label="Select APJ defender">5</button>
+        <button type="button" class="pitch-player" style="--x:85%;--y:69%" data-player="APJ defender" aria-label="Select APJ defender">2</button>
+        <button type="button" class="pitch-player keeper" style="--x:50%;--y:91%" data-player="APJ goalkeeper" aria-label="Select APJ goalkeeper">1</button>
+      </div>
+      <div class="visual-formation formation-blue" aria-label="Illustrative Team PFO formation">
+        <button type="button" class="pitch-player" style="--x:50%;--y:88%" data-player="PFO forward" aria-label="Select PFO forward">9</button>
+        <button type="button" class="pitch-player" style="--x:30%;--y:72%" data-player="PFO attacker" aria-label="Select PFO attacker">7</button>
+        <button type="button" class="pitch-player" style="--x:70%;--y:72%" data-player="PFO attacker" aria-label="Select PFO attacker">11</button>
+        <button type="button" class="pitch-player" style="--x:50%;--y:58%" data-player="PFO midfielder" aria-label="Select PFO midfielder">8</button>
+        <button type="button" class="pitch-player" style="--x:25%;--y:49%" data-player="PFO midfielder" aria-label="Select PFO midfielder">6</button>
+        <button type="button" class="pitch-player" style="--x:75%;--y:49%" data-player="PFO midfielder" aria-label="Select PFO midfielder">10</button>
+        <button type="button" class="pitch-player" style="--x:15%;--y:31%" data-player="PFO defender" aria-label="Select PFO defender">3</button>
+        <button type="button" class="pitch-player" style="--x:38%;--y:27%" data-player="PFO defender" aria-label="Select PFO defender">4</button>
+        <button type="button" class="pitch-player" style="--x:62%;--y:27%" data-player="PFO defender" aria-label="Select PFO defender">5</button>
+        <button type="button" class="pitch-player" style="--x:85%;--y:31%" data-player="PFO defender" aria-label="Select PFO defender">2</button>
+        <button type="button" class="pitch-player keeper" style="--x:50%;--y:9%" data-player="PFO goalkeeper" aria-label="Select PFO goalkeeper">1</button>
+      </div>
+    </div>
+    <div class="pitch-detail" id="pitchDetail" aria-live="polite"><strong>Interactive pitch</strong><span>Tap any shirt number to inspect its illustrative position. Final lineups remain subject to the captains.</span></div>
+    <div class="graphics-footnote">Schematic formation for match-day visuals only. Player numbers are illustrative and do not replace the official squad list.</div>
+  </section>
+  <div class="match-meta"><span class="match-chip" id="matchStatus">SCHEDULED</span><span class="match-chip" id="matchMinute">Before kickoff</span><span class="match-chip">📍 University of Ibadan Stadium</span><span class="match-chip">🗓 Saturday, 31 October 2026 · 8:00 AM WAT</span></div>
   <div class="events-area"><h3>Match timeline</h3><div class="event-list" id="eventList"><p class="empty-events">Match events will appear here when the admin adds them.</p></div></div>
 </section>
 <section class="live-center" id="awardsBoard" aria-label="Individual awards">
@@ -99,12 +191,12 @@ main{padding:23px 0 34px}.summary{display:flex;align-items:center;justify-conten
 
 <div class="team-grid" id="teams"></div>
 <div class="actions"><button class="btn btn-main" id="share">↗ Share match-day lineups</button><button class="btn btn-alt" id="copy">▤ Copy team list</button></div>
-<div class="notice"><div class="notice-icon">📍</div><div><strong>Match-day reminder</strong><br>Kick-off is at <strong>8:00 AM on Saturday, 14 November 2026</strong> at the <strong>University of Ibadan Stadium</strong>. Players and supporters are encouraged to arrive before <strong>7:30 AM</strong>.<br><br><strong>About this lineup</strong><br>The draw is fixed, so everyone opening this link sees the same teams. The pitch graphic is a visual 4-3-3-style arrangement for the starting XI only; it does not assign official playing positions. Team captains can confirm the actual positions before kickoff.</div></div>
+<div class="notice"><div class="notice-icon">📍</div><div><strong>Match-day reminder</strong><br>Kick-off is at <strong>8:00 AM on Saturday, 31 October 2026</strong> at the <strong>University of Ibadan Stadium</strong>. Players and supporters are encouraged to arrive before <strong>7:30 AM</strong>.<br><br><strong>About this lineup</strong><br>The draw is fixed, so everyone opening this link sees the same teams. The pitch graphic is a visual 4-3-3-style arrangement for the starting XI only; it does not assign official playing positions. Team captains can confirm the actual positions before kickoff.</div></div>
 <div class="notice" style="margin-top:12px"><div class="notice-icon">⛪</div><div><strong>New Reality Christian Centre</strong><br>10 Trinity Avenue, Educational Estate, Samonda, Ibadan, Oyo State.<br><a class="directions-link" href="https://www.google.com/maps/search/?api=1&query=10+Trinity+Avenue%2C+Educational+Estate%2C+Samonda%2C+Ibadan%2C+Oyo+State" target="_blank" rel="noopener">Get directions to church ↗</a></div></div>
 <footer class="footer"><b>NRCC IBADAN</b> · APJ vs PFO · Fair draw. Great fellowship. Beautiful game. ⚽</footer></main><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 // Match time is set to West Africa Time (Nigeria, UTC+1).
-const kickoff = new Date('2026-10-24T08:00:00+01:00').getTime();
+const kickoff = new Date('2026-10-31T08:00:00+01:00').getTime();
 function updateCountdown(){
  const now=Date.now();
  const remaining=kickoff-now;
@@ -147,7 +239,7 @@ function renderTeams(){
  document.querySelector('.stats').innerHTML=`<span class="stat">⚽ ${teams.reduce((n,t)=>n+t.players.length,0)} Players</span><span class="stat">👕 ${teams.reduce((n,t)=>n+Math.min(11,t.players.length),0)} Starters</span><span class="stat">🔁 ${teams.reduce((n,t)=>n+Math.max(0,t.players.length-11),0)} Subs</span>`;
  allText=buildAllText();
 }
-function buildAllText(){return 'NRCC IBADAN · MATCH-DAY LINEUPS\nTEAM APJ vs TEAM PFO\nDate: Saturday, 24 October 2026\nKick-off: 8:00 AM WAT\nVenue: University of Ibadan Stadium, Ibadan\nArrival reminder: Please arrive before 7:30 AM.\n\n'+teams.map(t=>t.name+' — '+t.squad+'\nManager: '+t.manager+'\nSTARTING XI\n'+t.players.slice(0,11).map((p,i)=>'#'+t.numbers[i]+' '+p+' ('+(positions[i]||'SUB')+')').join('\n')+'\n\nSUBSTITUTES\n'+t.players.slice(11).map((p,i)=>'#'+t.numbers[i+11]+' '+p).join('\n')).join('\n\n------------------------\n\n')+'\n\nFormation is illustrative; captains can confirm playing positions.';}
+function buildAllText(){return 'NRCC IBADAN · MATCH-DAY LINEUPS\nTEAM APJ vs TEAM PFO\nDate: Saturday, 31 October 2026\nKick-off: 8:00 AM WAT\nVenue: University of Ibadan Stadium, Ibadan\nArrival reminder: Please arrive before 7:30 AM.\n\n'+teams.map(t=>t.name+' — '+t.squad+'\nManager: '+t.manager+'\nSTARTING XI\n'+t.players.slice(0,11).map((p,i)=>'#'+t.numbers[i]+' '+p+' ('+(positions[i]||'SUB')+')').join('\n')+'\n\nSUBSTITUTES\n'+t.players.slice(11).map((p,i)=>'#'+t.numbers[i+11]+' '+p).join('\n')).join('\n\n------------------------\n\n')+'\n\nFormation is illustrative; captains can confirm playing positions.';}
 function fillSquadEditor(){
  const apj=teams.find(t=>t.id==='apj'),pfo=teams.find(t=>t.id==='pfo');
  if(!apj||!pfo)return;
@@ -252,7 +344,7 @@ function renderMatchReport(){
  if(apjGoals+pfoGoals===0&&status==='Full Time')suggestions.push('No goal events were logged. Confirm the score and review attacking chances before drawing performance conclusions.');
  if(subs.length>0)suggestions.push('Review substitution timing and subsequent match events to assess whether changes improved control or attacking threat.');
  if(!suggestions.length)suggestions.push('Keep recording goal scorers, assists, cards, substitutions and key chances. More complete event data will make future performance reviews more useful.');
- reportSummaryData={reportVersion:1,matchId:MATCH_ID,match:'NRCC Ibadan: Team APJ vs Team PFO',venue:'University of Ibadan Stadium, Ibadan',scheduledKickoff:'2026-10-24T08:00:00+01:00',generatedAt:new Date().toISOString(),status,minute:currentMatchData.minute||'Before kickoff',score:{APJ:scoreA,PFO:scoreP},result,stats:{totalEvents:events.length,goalEvents:goals.length,APJGoalEvents:apjGoals,PFOGoalEvents:pfoGoals,yellowCards:yellow,redCards:red,totalSubstitutions:subs.length,APJSubstitutions:apjSubs,PFOSubstitutions:pfoSubs,awardsPublished:awards.length},awards,teams:window.nrccGetSquadsPayload?.()||{},events:events.map(e=>({id:e.id,minute:e.minute||'',type:e.type||'Match update',team:eventTeamId(e),description:e.description||'',playerOff:e.playerOff||null,playerOn:e.playerOn||null,createdAt:eventDate(e)})),improvementPrompts:suggestions};
+ reportSummaryData={reportVersion:1,matchId:MATCH_ID,match:'NRCC Ibadan: Team APJ vs Team PFO',venue:'University of Ibadan Stadium, Ibadan',scheduledKickoff:'2026-10-31T08:00:00+01:00',generatedAt:new Date().toISOString(),status,minute:currentMatchData.minute||'Before kickoff',score:{APJ:scoreA,PFO:scoreP},result,stats:{totalEvents:events.length,goalEvents:goals.length,APJGoalEvents:apjGoals,PFOGoalEvents:pfoGoals,yellowCards:yellow,redCards:red,totalSubstitutions:subs.length,APJSubstitutions:apjSubs,PFOSubstitutions:pfoSubs,awardsPublished:awards.length},awards,teams:window.nrccGetSquadsPayload?.()||{},events:events.map(e=>({id:e.id,minute:e.minute||'',type:e.type||'Match update',team:eventTeamId(e),description:e.description||'',playerOff:e.playerOff||null,playerOn:e.playerOn||null,createdAt:eventDate(e)})),improvementPrompts:suggestions};
  $('reportState').textContent=status==='Full Time'?'FULL-TIME REPORT':'LIVE SUMMARY';
  root.innerHTML=`<article class="award-card"><div class="award-label">Current result</div><h4>APJ ${scoreA} – ${scoreP} PFO</h4><p>${safeText(result)} · ${safeText(status)} · ${safeText(currentMatchData.minute||'Before kickoff')}</p></article><article class="award-card"><div class="award-label">Goal record</div><h4>APJ ${apjGoals} · PFO ${pfoGoals}</h4><p>Goals attributed from the event log. Compare this with the scoreboard to catch missing or duplicated goal entries.</p></article><article class="award-card"><div class="award-label">Discipline</div><h4>${yellow} yellow · ${red} red</h4><p>Cards recorded in the timeline. Add a player's name and reason to each card description for deeper analysis.</p></article><article class="award-card"><div class="award-label">Substitution review</div><h4>${subs.length} total</h4><p>APJ: ${apjSubs} · PFO: ${pfoSubs}. Include a reason and impact in the event description to support tactical reviews.</p></article><article class="award-card"><div class="award-label">Match activity</div><h4>${events.length} events · ${awards.length} awards</h4><p>The report includes the full timeline, published awards, squads and timestamps.</p></article><article class="award-card"><div class="award-label">Improvement prompts</div><h4>What to review next</h4><p>${suggestions.map(safeText).join('<br><br>')}</p></article>`;
 }
@@ -465,6 +557,37 @@ $('saveSquads').addEventListener('click',async()=>{
   }catch(e){adminMessage('Could not save squads: '+e.message,true);}
   finally{$('saveSquads').disabled=false;}
 });
+
+// Local interactive pitch controls and score-change animation. Firebase remains the source of live scores.
+(function initMatchVisualiser(){
+ const pitch=document.getElementById('visualPitch');
+ if(!pitch)return;
+ const detail=document.getElementById('pitchDetail');
+ const teamButtons=[...document.querySelectorAll('.graphics-team')];
+ teamButtons.forEach(button=>button.addEventListener('click',()=>{
+   const team=button.dataset.team;
+   pitch.dataset.highlight=team;
+   teamButtons.forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+   detail.innerHTML='<strong>'+ (team==='apj'?'🔴 Team APJ':'🔵 Team PFO') +'</strong><span>That team is highlighted on the schematic pitch. Tap a shirt number for its illustrative position.</span>';
+ }));
+ pitch.querySelectorAll('.pitch-player').forEach(button=>button.addEventListener('click',()=>{
+   pitch.querySelectorAll('.pitch-player').forEach(p=>p.classList.remove('selected'));
+   button.classList.add('selected');
+   const team=button.closest('.formation-red')?'Team APJ':'Team PFO';
+   detail.innerHTML='<strong>'+team+' · '+button.dataset.player+'</strong><span>Illustrative tactical role. Final player placement should be confirmed by the team captain.</span>';
+ }));
+ const animate=document.getElementById('animateAttack');
+ if(animate)animate.addEventListener('click',()=>{
+   pitch.classList.remove('animate-attack');void pitch.offsetWidth;pitch.classList.add('animate-attack');
+   animate.textContent='↻ Replay attack';
+   window.setTimeout(()=>pitch.classList.remove('animate-attack'),2050);
+ });
+ ['scoreAPJ','scorePFO'].forEach(id=>{
+   const el=document.getElementById(id);if(!el)return;
+   let previous=el.textContent;
+   new MutationObserver(()=>{if(el.textContent!==previous){previous=el.textContent;el.classList.remove('score-pop');void el.offsetWidth;el.classList.add('score-pop');}}).observe(el,{childList:true,characterData:true,subtree:true});
+ });
+})();
 </script>
 
 </body></html>
