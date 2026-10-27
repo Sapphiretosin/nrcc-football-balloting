@@ -689,6 +689,8 @@ function startAdminAudit(){
 }
 function resetAccessUI(){
   currentManagerRole=null;
+  document.querySelectorAll('[data-room]').forEach(button=>{button.disabled=false;button.classList.toggle('active',button.dataset.room==='apj');});
+  activeManagerRoom='apj';
   $('communityAuth').classList.remove('access-hidden');
   $('communitySignedIn').classList.add('access-hidden');
   $('managerArea').classList.add('access-hidden');
