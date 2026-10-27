@@ -644,7 +644,7 @@ function listenManagerRoom(){
   if(activeManagerRoom!==team && auth.currentUser.uid!==ADMIN_UID){
     root.innerHTML='<p class="access-muted">You can only open your assigned team room.</p>';return;
   }
-  const messagesRef=collection(db,'managerRooms',activeManagerRoom,'messages');
+  const messagesRef=collection(db,'matches',MATCH_ID,'managerRooms',activeManagerRoom,'messages');
   managerChatStop=onSnapshot(query(messagesRef,orderBy('createdAt','desc'),limit(80)),snap=>{
     const messages=snap.docs.map(d=>d.data()).reverse();
     root.innerHTML=messages.length?messages.map(renderChatMessage).join(''):'<p class="access-muted">No messages yet. Start the team conversation.</p>';
@@ -664,7 +664,7 @@ async function sendChatMessage(textValue,room){
     if(!currentManagerRole?.active && user.uid!==ADMIN_UID)throw new Error('Your account has not been approved as a manager.');
     const team=room;
     if(user.uid!==ADMIN_UID && currentManagerRole.team!==team)throw new Error('You may only message in your assigned team room.');
-    await addDoc(collection(db,'managerRooms',team,'messages'),payload);
+    await addDoc(collection(db,'matches',MATCH_ID,'managerRooms',team,'messages'),payload);
   }
 }
 async function recordManagerLogin(user,role){
