@@ -15,19 +15,24 @@ FEATURES IN THIS BUILD
 - Firestore rules are supplied separately in firestore.rules.
 
 IMPORTANT SETUP BEFORE DEPLOYMENT
-1. In Firebase Console, open Authentication > Sign-in method and enable Email/Password.
-2. Open Firestore Database > Rules and replace the rules with the contents of firestore.rules. Review them before publishing. These rules intentionally restrict all match edits to the existing Super Admin UID.
-3. Create the four manager accounts in Firebase Authentication (email/password) when ready. Do not share passwords with the developer.
-4. For each manager, copy the Firebase Authentication UID and create a Firestore document in collection managerRoles with the UID as document ID. Fields:
+DO NOT PUBLISH THE NEW RULES OR DEPLOY THIS BRANCH YET.
+
+1. Preserve the currently working Netlify deployment and current Firebase rules as rollback copies.
+2. Validate firestore.rules in the Firebase Emulator Suite or Rules Playground first. Check existing match reads, score/event writes by the Super Admin, public-chat access, manager room isolation, and manager-role protection.
+3. Confirm Authentication > Sign-in method has Email/Password enabled.
+4. Once rules pass validation, plan a coordinated deployment of the new rules and the branch's website files. Do not publish new rules in isolation without confirming compatibility with the live app.
+5. The existing Super Admin UID in index.html is Lgn7v7G0d3UdivdoTTYp0VbdpMg2. Confirm it is the intended account before rollout.
+6. After rules and site code have been reviewed and deployed to a test environment, create the four manager accounts in Firebase Authentication (email/password) when ready. Do not share passwords with the developer.
+7. For each manager, copy the Firebase Authentication UID and create a Firestore document in collection managerRoles with the UID as document ID. Fields:
    - team: "apj" or "pfo"
    - displayName: manager's display name
    - email: same email as the Authentication account
    - active: true
    Only the configured Super Admin can write managerRoles under the rules.
-5. The existing ADMIN_UID in index.html is Lgn7v7G0d3UdivdoTTYp0VbdpMg2. Ensure this is the intended Super Admin account and that the Firebase security rules in the Console match it.
-6. Deploy the branch's site files to Netlify only after Firebase rules are published. Keep a copy of the current live site before replacing it.
-7. Test: public sign-up/sign-in and public chat; APJ manager can read/write APJ room but not PFO; PFO manager can read/write PFO but not APJ; public user cannot read either private room; only Super Admin can change match score, events, squads, awards, or manager roles.
+8. Test with separate test accounts: public sign-up/sign-in and public chat; APJ manager can read/write APJ room but not PFO; PFO manager can read/write PFO but not APJ; ordinary public user cannot read either private room; only Super Admin can change match score, events, squads, awards, or manager roles.
+9. Verify the existing live scoreboard, match timeline, squad display, and report features after deployment. Keep rollback files available until checks pass.
 
+The draft branch is not production-ready until the rules and client code have been tested together.
 AUDIT LIMITATION
 This records successful sign-ins when an approved manager's role document is read by the client. It does not provide a complete failed-login/unauthorised-attempt audit. For that, configure Firebase Authentication/Google Cloud Logging or a trusted backend. Login events recorded from the browser are useful app telemetry, not a tamper-proof forensic audit.
 
