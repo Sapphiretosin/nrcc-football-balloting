@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isSuperAdmin() { return signedIn() && request.auth.uid == 'Lgn7v7G0d3UdivdoTTYp0VbdpMg2'; }
+    function managerRole() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/managerRoles/$(request.auth.uid))
+        && get(/databases/$(database)/documents/managerRoles/$(request.auth.uid)).data.active == true
+        && get(/databases/$(database)/documents/managerRoles/$(request.auth.uid)).data.team in ['apj', 'pfo'];
+    }
+    function isManagerFor(team) {
+      return isSuperAdmin() || (managerRole()
+        && get(/databases/$(database)/documents/managerRoles/$(request.auth.uid)).data.team == team);
+    }
+    match /matches/{matchId} {
+      allow read: if true;
+      allow create, update, delete: if isSuperAdmin();
+      match /events/{eventId} {
+        allow read: if true;
+        allow create, update, delete: if isSuperAdmin();
+      }
+      match /publicChat/{messageId} {
+        allow read: if true;
+        allow create: if signedIn()
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 600
+          && request.resource.data.displayName is string
+          && request.resource.data.displayName.size() <= 40
+          && request.resource.data.createdAt == request.time;
+        allow update, delete: if isSuperAdmin();
+      }
+      match /managerRooms/{team}/messages/{messageId} {
+        allow read: if isManagerFor(team);
+        allow create: if isManagerFor(team)
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 600
+          && request.resource.data.createdAt == request.time;
+        allow update, delete: if isSuperAdmin();
+      }
+    }
+    match /managerRoles/{uid} {
+      allow read: if isSuperAdmin() || (signedIn() && request.auth.uid == uid);
+      allow create, update, delete: if isSuperAdmin();
+    }
+    match /publicProfiles/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.email == request.auth.token.email;
+      allow delete: if isSuperAdmin();
+    }
+    match /managerLoginAudit/{entryId} {
+      allow read: if isSuperAdmin();
+      allow create: if managerRole()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.team == get(/databases/$(database)/documents/managerRoles/$(request.auth.uid)).data.team
+        && request.resource.data.loginAt == request.time
+        && request.resource.data.email == request.auth.token.email;
+      allow update, delete: if isSuperAdmin();
+    }
+  }
+}
