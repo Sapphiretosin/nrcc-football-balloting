@@ -21,7 +21,7 @@ service cloud.firestore {
         allow create, update, delete: if isSuperAdmin();
       }
       match /publicChat/{messageId} {
-        allow read: if true;
+        allow read: if signedIn();
         allow create: if signedIn()
           && request.resource.data.uid == request.auth.uid
           && request.resource.data.text is string
