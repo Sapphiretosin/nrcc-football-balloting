@@ -1,0 +1,40 @@
+NRCC MATCHDAY ACCESS + CHAT SETUP
+===================================
+
+Branch: matchday-access-chat
+Existing live site is NOT changed by this branch until you deploy it.
+
+FEATURES IN THIS BUILD
+- Public match chat requires a signed-in account.
+- Visitors can create public accounts; this does not grant manager access.
+- APJ and PFO private manager rooms.
+- Manager role registry with four intended slots (two APJ, two PFO).
+- Super Admin manager-login dashboard.
+- Main scoreboard controls remain Super Admin-only.
+- Successful manager sign-ins are recorded in managerLoginAudit.
+- Firestore rules are supplied separately in firestore.rules.
+
+IMPORTANT SETUP BEFORE DEPLOYMENT
+DO NOT PUBLISH THE NEW RULES OR DEPLOY THIS BRANCH YET.
+
+1. Preserve the currently working Netlify deployment and current Firebase rules as rollback copies.
+2. Validate firestore.rules in the Firebase Emulator Suite or Rules Playground first. Check existing match reads, score/event writes by the Super Admin, public-chat access, manager room isolation, and manager-role protection.
+3. Confirm Authentication > Sign-in method has Email/Password enabled.
+4. Once rules pass validation, plan a coordinated deployment of the new rules and the branch's website files. Do not publish new rules in isolation without confirming compatibility with the live app.
+5. The existing Super Admin UID in index.html is Lgn7v7G0d3UdivdoTTYp0VbdpMg2. Confirm it is the intended account before rollout.
+6. After rules and site code have been reviewed and deployed to a test environment, create the four manager accounts in Firebase Authentication (email/password) when ready. Do not share passwords with the developer.
+7. For each manager, copy the Firebase Authentication UID and create a Firestore document in collection managerRoles with the UID as document ID. Fields:
+   - team: "apj" or "pfo"
+   - displayName: manager's display name
+   - email: same email as the Authentication account
+   - active: true
+   Only the configured Super Admin can write managerRoles under the rules.
+8. Test with separate test accounts: public sign-up/sign-in and public chat; APJ manager can read/write APJ room but not PFO; PFO manager can read/write PFO but not APJ; ordinary public user cannot read either private room; only Super Admin can change match score, events, squads, awards, or manager roles.
+9. Verify the existing live scoreboard, match timeline, squad display, and report features after deployment. Keep rollback files available until checks pass.
+
+The draft branch is not production-ready until the rules and client code have been tested together.
+AUDIT LIMITATION
+This records successful sign-ins when an approved manager's role document is read by the client. It does not provide a complete failed-login/unauthorised-attempt audit. For that, configure Firebase Authentication/Google Cloud Logging or a trusted backend. Login events recorded from the browser are useful app telemetry, not a tamper-proof forensic audit.
+
+CURRENT STATUS
+Manager accounts are not created yet. The manager room will remain unavailable to ordinary users until an active role document exists. Do not treat the feature as production-secure until the Firestore rules have been published and tested in the Firebase Console.

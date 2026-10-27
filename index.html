@@ -85,6 +85,8 @@ main{padding:23px 0 34px}.summary{display:flex;align-items:center;justify-conten
 @media(max-width:540px){.match-graphics{padding:14px}.visual-pitch{min-height:390px}.graphics-play{margin-left:0}.graphics-controls{gap:6px}.graphics-team,.graphics-play{flex:1;justify-content:center}.pitch-detail{display:block}.pitch-detail span{display:block;margin-top:3px}}
 @media(prefers-reduced-motion:reduce){.visual-formation,.pitch-player,.score-number{transition:none}.visual-pitch.animate-attack .moving-ball,.visual-pitch.animate-attack .attack-path,.score-number.score-pop{animation:none}}
 
+/* Matchday access and chat */
+.access-chat{margin:24px auto;max-width:1180px;padding:0 16px}.access-card{background:#fff;border:1px solid #dce5e2;border-radius:18px;padding:20px;box-shadow:0 10px 30px #102c2410;margin-bottom:16px}.access-card h2,.access-card h3{margin:0 0 8px}.access-muted{color:#63736e;font-size:13px;line-height:1.55}.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.access-form{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.access-form input,.access-form select,.access-form button,.access-chat textarea{font:inherit;border-radius:10px;padding:11px;border:1px solid #cbd7d2;max-width:100%}.access-form input{flex:1;min-width:180px}.access-form button{cursor:pointer;background:#153f35;color:white;border:0;font-weight:700}.access-status{font-size:13px;margin-top:8px;min-height:18px}.access-rooms{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.access-rooms button{border:1px solid #cbd7d2;border-radius:999px;padding:9px 13px;background:#f4f7f5;font-weight:700;cursor:pointer}.access-rooms button.active{background:#153f35;color:#fff}.chat-list{height:280px;overflow:auto;border:1px solid #e0e7e4;border-radius:12px;padding:12px;background:#f8faf9}.chat-message{padding:9px 10px;border-bottom:1px solid #e7eeeb;overflow-wrap:anywhere}.chat-message:last-child{border:0}.chat-message b{font-size:13px}.chat-message time{font-size:11px;color:#73817d;margin-left:8px}.chat-message p{margin:5px 0 0;white-space:pre-wrap}.chat-compose{display:flex;gap:8px;margin-top:10px}.chat-compose textarea{flex:1;min-height:48px;resize:vertical}.chat-compose button{border:0;border-radius:10px;padding:10px 16px;background:#153f35;color:white;font-weight:700}.audit-table-wrap{overflow:auto}.audit-table{width:100%;border-collapse:collapse;font-size:13px}.audit-table th,.audit-table td{text-align:left;padding:10px;border-bottom:1px solid #e3eae7;white-space:nowrap}.audit-table th{background:#f3f7f5}.access-hidden{display:none!important}@media(max-width:540px){.access-card{padding:14px}.chat-compose{flex-direction:column}.chat-compose button{min-height:44px}}
 </style>
 </head>
 <body>
@@ -371,6 +373,14 @@ KKKKAKKKKAKKKKAKweiigIN0/wDkN5VU0nGiipyOkeJxqxer3h+tRRWI1lnR
   <div class="admin-actions" style="padding:0 16px 16px;margin-top:0"><button class="btn btn-main" id="downloadReport" type="button">⬇ Download match report (JSON)</button><button class="btn btn-alt" id="downloadReportCSV" type="button">⬇ Download event log (CSV)</button><button class="btn btn-alt" id="archiveReport" type="button">☁ Save report to Firebase archive</button></div>
   <p class="admin-small" style="padding:0 16px 16px;margin:0">Export the report before clearing the board. The JSON report is designed to preserve match data for later app development and season-to-season analysis.</p>
 </section>
+<section class="access-chat" id="communityHub">
+<div class="access-card"><h2>💬 NRCC Matchday Community</h2><p class="access-muted">Sign in to join the public match chat. Public registration never grants team privileges.</p>
+<div id="communityAuth"><div class="access-form"><input id="communityName" maxlength="40" placeholder="Display name (new account)" autocomplete="nickname"><input id="communityEmail" type="email" placeholder="Email address" autocomplete="username"><input id="communityPassword" type="password" placeholder="Password" autocomplete="current-password" minlength="6"><button id="communitySignIn" type="button">Sign in</button><button id="communityRegister" type="button">Create public account</button></div><div class="access-status" id="communityAuthStatus" aria-live="polite"></div></div>
+<div id="communitySignedIn" class="access-hidden"><b id="communityIdentity"></b> <button id="communitySignOut" type="button">Sign out</button></div></div>
+<div class="access-card"><h3>🌍 Public Match Chat</h3><p class="access-muted">For signed-in community members. Keep it respectful and match-focused.</p><div class="chat-list" id="publicChatList" aria-live="polite"><p class="access-muted">Sign in to load the conversation.</p></div><div class="chat-compose"><textarea id="publicChatInput" maxlength="600" placeholder="Write a matchday message..." disabled></textarea><button id="publicChatSend" type="button" disabled>Send message</button></div><div class="access-status" id="publicChatStatus" aria-live="polite"></div></div>
+<div class="access-card"><h3>🔐 Manager Access & Team Rooms</h3><p class="access-muted">Four manager slots are reserved: two APJ and two PFO. Only accounts approved by the Super Admin can enter private rooms. Manager access does not grant main scoreboard control.</p><div id="managerArea" class="access-hidden"><p id="managerWelcome"></p><div class="access-rooms"><button type="button" data-room="apj" class="active">🔴 APJ Managers</button><button type="button" data-room="pfo">🔵 PFO Managers</button></div><div class="chat-list" id="managerChatList" aria-live="polite"></div><div class="chat-compose"><textarea id="managerChatInput" maxlength="600" placeholder="Message your team managers..." disabled></textarea><button id="managerChatSend" type="button" disabled>Send to team</button></div><div class="access-status" id="managerChatStatus" aria-live="polite"></div></div><div id="managerGuestNote" class="access-muted">Manager accounts are not set up yet. After creating the four Firebase Authentication accounts, the Super Admin can approve their team roles in the access registry.</div></div>
+<div class="access-card access-hidden" id="accessDashboard"><h3>📊 Super Admin · Manager Access Log</h3><p class="access-muted">Successful manager sign-ins recorded by this app. Failed sign-ins require Firebase Authentication/Cloud Logging monitoring.</p><div class="access-grid"><div><b>Approved managers</b><div id="approvedManagerCount">0 / 4</div></div><div><b>Recorded successful logins</b><div id="loginEventCount">0</div></div><div><b>Latest login</b><div id="latestLogin">No records yet</div></div></div><div class="audit-table-wrap"><table class="audit-table"><thead><tr><th>Manager</th><th>Team</th><th>Email</th><th>Login time</th></tr></thead><tbody id="loginAuditRows"><tr><td colspan="4">No records yet.</td></tr></tbody></table></div><h3 style="margin-top:18px">Approve manager accounts</h3><p class="access-muted">After creating each manager in Firebase Authentication, copy their UID and create a <code>managerRoles</code> document using that UID as its ID. Fields: <code>team</code> ("apj" or "pfo"), <code>displayName</code>, <code>email</code>, and <code>active: true</code>. Only the Super Admin can write this registry under the supplied rules.</p></div>
+</section>
 <section class="admin-area" id="adminArea">
   <button class="admin-toggle" id="adminToggle" type="button" aria-expanded="false">🔐 ADMIN CONTROL ROOM · Sign in</button>
   <div class="admin-body" id="adminBody"><p class="admin-note">Authorized administrators can update the score, match status and timeline. Updates sync live to everyone viewing this page.</p>
@@ -481,8 +491,8 @@ document.getElementById('share').addEventListener('click',async()=>{try{if(navig
 </script>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
-import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, query, orderBy, serverTimestamp, runTransaction, deleteDoc, getDocs, writeBatch } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, addDoc, query, orderBy, serverTimestamp, runTransaction, deleteDoc, getDocs, writeBatch, limit } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCCGYJNS0OcfqH7emwj-xKzEkLBlj99kpY",
@@ -593,10 +603,185 @@ function startMatchListener(){
 renderGoalScorers();
 startMatchListener();
 refreshSubstitutionOptions();
-onAuthStateChanged(auth,user=>{
+
+/* NRCC access + chat features. Firestore rules must be deployed with this code. */
+const publicChatRef = collection(db,'matches',MATCH_ID,'publicChat');
+const rolesRef = collection(db,'managerRoles');
+const auditRef = collection(db,'managerLoginAudit');
+let currentManagerRole = null;
+let activeManagerRoom = 'apj';
+let publicChatStop = null;
+let managerChatStop = null;
+let auditStop = null;
+let rolesStop = null;
+const chatTime = value => {
+  try { if(value?.toDate) return value.toDate().toLocaleString(); if(value?.seconds) return new Date(value.seconds*1000).toLocaleString(); } catch {}
+  return 'just now';
+};
+function chatStatus(id,msg,isError=false){const el=$(id);if(el){el.textContent=msg;el.classList.toggle('error',isError);}}
+function renderChatMessage(data){
+  const name=safeText(data.displayName||data.email||'Member');
+  const body=safeText(data.text||'');
+  return '<article class="chat-message"><div class="chat-message-meta"><b>'+name+'</b><time>'+safeText(chatTime(data.createdAt))+'</time></div><p>'+body+'</p></article>';
+}
+function listenPublicChat(){
+  if(publicChatStop){publicChatStop();publicChatStop=null;}
+  const root=$('publicChatList');
+  if(!auth.currentUser){root.innerHTML='<p class="access-muted">Sign in to load the conversation.</p>';return;}
+  publicChatStop=onSnapshot(query(publicChatRef,orderBy('createdAt','desc'),limit(80)),snap=>{
+    const messages=snap.docs.map(d=>d.data()).reverse();
+    root.innerHTML=messages.length?messages.map(renderChatMessage).join(''):'<p class="access-muted">Be the first to start the matchday conversation.</p>';
+    root.scrollTop=root.scrollHeight;
+  },err=>{root.innerHTML='<p class="access-muted">Chat could not load. Check that the matching Firestore rules have been deployed.</p>';chatStatus('publicChatStatus',err.message,true);});
+}
+function listenManagerRoom(){
+  if(managerChatStop){managerChatStop();managerChatStop=null;}
+  const root=$('managerChatList');
+  if(!auth.currentUser||!currentManagerRole?.active||!currentManagerRole?.team){
+    root.innerHTML='<p class="access-muted">An approved manager account is required.</p>';return;
+  }
+  const team=currentManagerRole.team;
+  if(activeManagerRoom!==team && auth.currentUser.uid!==ADMIN_UID){
+    root.innerHTML='<p class="access-muted">You can only open your assigned team room.</p>';return;
+  }
+  const messagesRef=collection(db,'managerRooms',activeManagerRoom,'messages');
+  managerChatStop=onSnapshot(query(messagesRef,orderBy('createdAt','desc'),limit(80)),snap=>{
+    const messages=snap.docs.map(d=>d.data()).reverse();
+    root.innerHTML=messages.length?messages.map(renderChatMessage).join(''):'<p class="access-muted">No messages yet. Start the team conversation.</p>';
+    root.scrollTop=root.scrollHeight;
+  },err=>{root.innerHTML='<p class="access-muted">Team room could not load. Verify the Firestore rules.</p>';chatStatus('managerChatStatus',err.message,true);});
+}
+async function sendChatMessage(textValue,room){
+  const user=auth.currentUser;
+  const textValueClean=String(textValue||'').trim();
+  if(!user)throw new Error('Please sign in first.');
+  if(!textValueClean||textValueClean.length>600)throw new Error('Message must contain 1 to 600 characters.');
+  let displayName=user.displayName||user.email||'Member';
+  try{const profile=await getDoc(doc(db,'publicProfiles',user.uid));if(profile.exists()&&profile.data().displayName)displayName=profile.data().displayName;}catch{}
+  const payload={uid:user.uid,email:user.email||'',displayName:String(displayName).slice(0,40),text:textValueClean,createdAt:serverTimestamp()};
+  if(room==='public') await addDoc(publicChatRef,payload);
+  else {
+    if(!currentManagerRole?.active && user.uid!==ADMIN_UID)throw new Error('Your account has not been approved as a manager.');
+    const team=room;
+    if(user.uid!==ADMIN_UID && currentManagerRole.team!==team)throw new Error('You may only message in your assigned team room.');
+    await addDoc(collection(db,'managerRooms',team,'messages'),payload);
+  }
+}
+async function recordManagerLogin(user,role){
+  if(!user||user.uid===ADMIN_UID||!role?.active)return;
+  try{await addDoc(auditRef,{uid:user.uid,email:user.email||'',displayName:role.displayName||user.displayName||user.email||'Manager',team:role.team,loginAt:serverTimestamp()});}
+  catch(e){console.warn('Manager login audit could not be recorded:',e.message);}
+}
+function startAdminAudit(){
+  if(auditStop){auditStop();auditStop=null;}
+  if(rolesStop){rolesStop();rolesStop=null;}
+  if(!isAdmin)return;
+  auditStop=onSnapshot(query(auditRef,orderBy('loginAt','desc'),limit(200)),snap=>{
+    const rows=snap.docs.map(d=>d.data());
+    $('loginEventCount').textContent=String(rows.length);
+    $('latestLogin').textContent=rows.length?chatTime(rows[0].loginAt):'No records yet';
+    $('loginAuditRows').innerHTML=rows.length?rows.map(r=>'<tr><td>'+safeText(r.displayName||r.email||'Manager')+'</td><td>'+safeText(String(r.team||'').toUpperCase())+'</td><td>'+safeText(r.email||'')+'</td><td>'+safeText(chatTime(r.loginAt))+'</td></tr>').join(''):'<tr><td colspan="4">No records yet.</td></tr>';
+  },e=>chatStatus('communityAuthStatus','Login audit unavailable: '+e.message,true));
+  rolesStop=onSnapshot(rolesRef,snap=>{
+    const active=snap.docs.map(d=>d.data()).filter(r=>r.active===true&&['apj','pfo'].includes(r.team));
+    $('approvedManagerCount').textContent=Math.min(active.filter(r=>r.team==='apj').length,2)+' / 2 APJ · '+Math.min(active.filter(r=>r.team==='pfo').length,2)+' / 2 PFO';
+  },e=>console.warn('Manager role registry unavailable:',e.message));
+}
+function resetAccessUI(){
+  currentManagerRole=null;
+  $('communityAuth').classList.remove('access-hidden');
+  $('communitySignedIn').classList.add('access-hidden');
+  $('managerArea').classList.add('access-hidden');
+  $('managerGuestNote').classList.remove('access-hidden');
+  $('accessDashboard').classList.add('access-hidden');
+  $('publicChatInput').disabled=true;$('publicChatSend').disabled=true;
+  $('managerChatInput').disabled=true;$('managerChatSend').disabled=true;
+  if(publicChatStop){publicChatStop();publicChatStop=null;}
+  if(managerChatStop){managerChatStop();managerChatStop=null;}
+  if(auditStop){auditStop();auditStop=null;}
+  if(rolesStop){rolesStop();rolesStop=null;}
+}
+$('communitySignIn').addEventListener('click',async()=>{
+  const email=$('communityEmail').value.trim(),password=$('communityPassword').value;
+  if(!email||!password){chatStatus('communityAuthStatus','Enter your email and password.',true);return;}
+  $('communitySignIn').disabled=true;
+  try{await signInWithEmailAndPassword(auth,email,password);$('communityPassword').value='';chatStatus('communityAuthStatus','Signed in.');}
+  catch(e){chatStatus('communityAuthStatus',e.code==='auth/invalid-credential'?'Sign-in failed. Check your details.':e.message,true);}
+  finally{$('communitySignIn').disabled=false;}
+});
+$('communityRegister').addEventListener('click',async()=>{
+  const name=$('communityName').value.trim(),email=$('communityEmail').value.trim(),password=$('communityPassword').value;
+  if(!name||name.length>40||!email||password.length<6){chatStatus('communityAuthStatus','Enter a display name (max 40 characters), email, and password of at least 6 characters.',true);return;}
+  $('communityRegister').disabled=true;
+  try{
+    const result=await createUserWithEmailAndPassword(auth,email,password);
+    await setDoc(doc(db,'publicProfiles',result.user.uid),{displayName:name,email:result.user.email,createdAt:serverTimestamp()});
+    $('communityPassword').value='';chatStatus('communityAuthStatus','Account created. You can now join the public chat.');
+  }catch(e){chatStatus('communityAuthStatus','Account setup failed: '+e.message,true);}
+  finally{$('communityRegister').disabled=false;}
+});
+$('communitySignOut').addEventListener('click',async()=>{try{await signOut(auth);}catch(e){chatStatus('communityAuthStatus',e.message,true);}});
+$('publicChatSend').addEventListener('click',async()=>{
+  const input=$('publicChatInput');$('publicChatSend').disabled=true;
+  try{await sendChatMessage(input.value,'public');input.value='';chatStatus('publicChatStatus','Message sent.');}
+  catch(e){chatStatus('publicChatStatus',e.message,true);}
+  finally{$('publicChatSend').disabled=!auth.currentUser;}
+});
+$('publicChatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('publicChatSend').click();}});
+document.querySelectorAll('[data-room]').forEach(button=>button.addEventListener('click',()=>{
+  const room=button.dataset.room;
+  if(auth.currentUser?.uid!==ADMIN_UID&&currentManagerRole?.team!==room){chatStatus('managerChatStatus','You can only access your assigned team room.',true);return;}
+  activeManagerRoom=room;document.querySelectorAll('[data-room]').forEach(b=>b.classList.toggle('active',b===button));listenManagerRoom();
+}));
+$('managerChatSend').addEventListener('click',async()=>{
+  const input=$('managerChatInput');$('managerChatSend').disabled=true;
+  try{await sendChatMessage(input.value,activeManagerRoom);input.value='';chatStatus('managerChatStatus','Message sent.');}
+  catch(e){chatStatus('managerChatStatus',e.message,true);}
+  finally{$('managerChatSend').disabled=!currentManagerRole?.active&&auth.currentUser?.uid!==ADMIN_UID;}
+});
+$('managerChatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('managerChatSend').click();}});
+
+onAuthStateChanged(auth,async user=>{
   isAdmin=!!user && user.uid===ADMIN_UID;
-  if(isAdmin){ $('loginPanel').classList.add('admin-hidden'); $('controlsPanel').classList.remove('admin-hidden'); if(window.nrccFillSquadEditor)window.nrccFillSquadEditor(); refreshSubstitutionOptions(); $('adminIdentity').textContent='Signed in as authorized administrator · '+user.email; $('adminToggle').textContent='🔐 ADMIN CONTROL ROOM · Signed in'; if($('undoEvent'))$('undoEvent').disabled=!latestEvent; adminMessage('Admin access verified. Changes will sync live.'); }
-  else { $('loginPanel').classList.remove('admin-hidden'); $('controlsPanel').classList.add('admin-hidden'); $('adminToggle').textContent='🔐 ADMIN CONTROL ROOM · Sign in'; if(user && user.uid!==ADMIN_UID){ adminMessage('This account is not authorized to administer this match.',true); } }
+  resetAccessUI();
+  if(isAdmin){
+    $('loginPanel').classList.add('admin-hidden'); $('controlsPanel').classList.remove('admin-hidden');
+    if(window.nrccFillSquadEditor)window.nrccFillSquadEditor(); refreshSubstitutionOptions();
+    $('adminIdentity').textContent='Signed in as authorized administrator · '+user.email;
+    $('adminToggle').textContent='🔐 ADMIN CONTROL ROOM · Signed in';
+    if($('undoEvent'))$('undoEvent').disabled=!latestEvent;
+    adminMessage('Admin access verified. Changes will sync live.');
+  } else {
+    $('loginPanel').classList.remove('admin-hidden'); $('controlsPanel').classList.add('admin-hidden');
+    $('adminToggle').textContent='🔐 ADMIN CONTROL ROOM · Sign in';
+    if(user && user.uid!==ADMIN_UID)adminMessage('This account is not authorized to administer this match.',true);
+  }
+  if(!user){listenPublicChat();return;}
+  $('communityAuth').classList.add('access-hidden');$('communitySignedIn').classList.remove('access-hidden');
+  $('communityIdentity').textContent='Signed in as '+(user.email||'community member');
+  $('publicChatInput').disabled=false;$('publicChatSend').disabled=false;
+  listenPublicChat();
+  if(isAdmin){
+    currentManagerRole={team:'apj',active:true,displayName:'Super Admin'};
+    $('managerArea').classList.remove('access-hidden');$('managerGuestNote').classList.add('access-hidden');
+    $('managerWelcome').textContent='Super Admin access · you can inspect both team rooms.';
+    $('managerChatInput').disabled=false;$('managerChatSend').disabled=false;
+    $('accessDashboard').classList.remove('access-hidden');listenManagerRoom();startAdminAudit();
+  } else {
+    try{
+      const roleSnap=await getDoc(doc(db,'managerRoles',user.uid));
+      if(roleSnap.exists()&&roleSnap.data().active===true&&['apj','pfo'].includes(roleSnap.data().team)){
+        currentManagerRole=roleSnap.data();activeManagerRoom=currentManagerRole.team;
+        $('managerArea').classList.remove('access-hidden');$('managerGuestNote').classList.add('access-hidden');
+        $('managerWelcome').textContent='Approved '+currentManagerRole.team.toUpperCase()+' manager · '+(currentManagerRole.displayName||user.email);
+        document.querySelectorAll('[data-room]').forEach(b=>{b.classList.toggle('active',b.dataset.room===activeManagerRoom);b.disabled=b.dataset.room!==activeManagerRoom;});
+        $('managerChatInput').disabled=false;$('managerChatSend').disabled=false;
+        listenManagerRoom();await recordManagerLogin(user,currentManagerRole);
+      } else {
+        $('managerGuestNote').textContent='You are signed in for public chat. This account has not been approved for a manager room.';
+      }
+    }catch(e){$('managerGuestNote').textContent='Public chat is available. Manager approval could not be checked; verify the Firestore rules.';console.warn(e);}
+  }
 });
 $('loginButton').addEventListener('click',async()=>{
   const email=$('adminEmail').value.trim(), password=$('adminPassword').value;
