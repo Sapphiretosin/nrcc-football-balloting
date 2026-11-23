@@ -684,7 +684,7 @@ function startAdminAudit(){
   },e=>chatStatus('communityAuthStatus','Login audit unavailable: '+e.message,true));
   rolesStop=onSnapshot(rolesRef,snap=>{
     const active=snap.docs.map(d=>d.data()).filter(r=>r.active===true&&['apj','pfo'].includes(r.team));
-    $('approvedManagerCount').textContent=Math.min(active.filter(r=>r.team==='apj').length,2)+' / 2 APJ · '+Math.min(active.filter(r=>r.team==='pfo').length,2)+' / 2 PFO';
+    $('approvedManagerCount').textContent=Math.min(active.filter(r=>r.team==='apj').length,2)+' / 2 NRCC IB FC · '+Math.min(active.filter(r=>r.team==='pfo').length,2)+' / 2 NYSC FC';
   },e=>console.warn('Manager role registry unavailable:',e.message));
 }
 function resetAccessUI(){
