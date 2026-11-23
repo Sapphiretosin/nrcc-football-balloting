@@ -480,6 +480,7 @@ function applySavedSquads(saved){
   if(players.length)team.players=players;
   if(typeof incoming.manager==='string'&&incoming.manager.trim())team.manager=incoming.manager.trim().slice(0,40);
   const used=new Set();team.numbers=team.players.map((_,i)=>{let num=Number(incoming.numbers?.[i]??team.numbers[i]);if(!Number.isInteger(num)||num<1||num>99||used.has(num)){do{num=Math.floor(Math.random()*99)+1}while(used.has(num));}used.add(num);return num;});
+  if(id==='apj'&&players.length>=11){team.players[8]='Sapphire';team.players[10]='DavidPsalms';team.numbers[8]=9;}
  }
  renderTeams();fillSquadEditor();
 }
