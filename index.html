@@ -444,7 +444,7 @@ updateCountdown();
 setInterval(updateCountdown,1000);
 
 const teams=[
- {id:'apj',name:'NRCC IB FC',squad:'Red Squad',manager:'PDD',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DM','CM','RM','CM','LM','ST','ST','CM','RB','DM','SUB','SUB','SUB','SUB','SUB'],players:['Min. Dami','Joshua','Michael','Vinval','Oplomania','Gracious','Dr. MBA','Francisspeedy','Sapphire','Mentor','DavidPsalms','Kahleb','Pst Temitope','Tobi','General','Alex','Samuel','Emmanuel','Joseph','Daniel']},
+ {id:'apj',name:'NRCC IB FC',squad:'Red Squad',manager:'PDD',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DM','CM','RM','CM','LM','ST','ST','CM','RB','DM','SUB','SUB','SUB','SUB','SUB'],players:['Min. Dami','Joshua','Michael','Vinval','Oplomania','Gracious','Dr. MBA','Francisspeedy','Sapphire','Mentor','Kayhleb','DavidPsalms','Pst Temitope','Tobi','General','Alex','Samuel','Emmanuel','Joseph','Daniel']},
  {id:'pfo',name:'NYSC FC',squad:'Blue Squad',manager:'Emmie',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DMF','CMF','RWF','AMF','LWF','CF','CB','CB / CMF','LB','RB','CMF','RWF','AMF','LWF','CF'],players:['Shanghai','AJ','Uthman','Henry','Friday','Ishola','Favour','Victor (Akin)','Victor (Omole)','Taiwo','Alex','Timi','Ope','Israel','BJ','ABU','Tomiwa','Awal','James','Peter']}
 ];
 const defaultSquads=teams.map(t=>({id:t.id,name:t.name,squad:t.squad,manager:t.manager,players:[...t.players],numbers:[...t.numbers]}));
@@ -480,7 +480,7 @@ function applySavedSquads(saved){
   if(players.length)team.players=players;
   if(typeof incoming.manager==='string'&&incoming.manager.trim())team.manager=incoming.manager.trim().slice(0,40);
   const used=new Set();team.numbers=team.players.map((_,i)=>{let num=Number(incoming.numbers?.[i]??team.numbers[i]);if(!Number.isInteger(num)||num<1||num>99||used.has(num)){do{num=Math.floor(Math.random()*99)+1}while(used.has(num));}used.add(num);return num;});
-  if(id==='apj'&&players.length>=11){team.players[8]='Sapphire';team.players[10]='DavidPsalms';team.numbers[8]=9;}
+  if(id==='apj'&&players.length>=12){team.players[8]='Sapphire';team.players[10]='Kayhleb';team.players[11]='DavidPsalms';team.numbers[8]=9;}
  }
  renderTeams();fillSquadEditor();
 }
