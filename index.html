@@ -443,7 +443,7 @@ updateCountdown();
 setInterval(updateCountdown,1000);
 
 const teams=[
- {id:'apj',name:'NRCC IB FC',squad:'Red Squad',manager:'PDD',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DM','CM','RM','CM','LM','ST','ST','CM','RB','DM','SUB','SUB','SUB','SUB','SUB'],players:['Min. Dami','Joshua','Michael','Vinval','Oplomania','Gracious','Dr. MBA','Francisspeedy','Mentor','DavidPsalms','Kahleb','Sapphire','Pst Temitope','Tobi','General','Alex','Samuel','Emmanuel','Joseph','Daniel']},
+ {id:'apj',name:'NRCC IB FC',squad:'Red Squad',manager:'PDD',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DM','CM','RM','CM','LM','ST','ST','CM','RB','DM','SUB','SUB','SUB','SUB','SUB'],players:['Min. Dami','Joshua','Michael','Vinval','Oplomania','Gracious','Dr. MBA','Francisspeedy','Sapphire','Mentor','DavidPsalms','Kahleb','Pst Temitope','Tobi','General','Alex','Samuel','Emmanuel','Joseph','Daniel']},
  {id:'pfo',name:'NYSC FC',squad:'Blue Squad',manager:'Emmie',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DMF','CMF','RWF','AMF','LWF','CF','CB','CB / CMF','LB','RB','CMF','RWF','AMF','LWF','CF'],players:['Shanghai','AJ','Uthman','Henry','Friday','Ishola','Favour','Victor (Akin)','Victor (Omole)','Taiwo','Alex','Timi','Ope','Israel','BJ','ABU','Tomiwa','Awal','James','Peter']}
 ];
 const defaultSquads=teams.map(t=>({id:t.id,name:t.name,squad:t.squad,manager:t.manager,players:[...t.players],numbers:[...t.numbers]}));
@@ -790,7 +790,7 @@ $('loginButton').addEventListener('click',async()=>{
   if(!email||!password){adminMessage('Enter your administrator email and password.',true);return;}
   $('loginButton').disabled=true;
   try { const result=await signInWithEmailAndPassword(auth,email,password); if(result.user.uid!==ADMIN_UID){await signOut(auth);throw new Error('This account is not authorized for the admin dashboard. Use the Firebase user whose UID is authorized in Firestore rules.');} $('adminPassword').value=''; adminMessage('Signed in successfully.'); }
-  catch(e){adminMessage(e.code==='auth/invalid-credential'?'Sign-in failed. Check the email and password and try again.':(e.message||'Sign-in failed.'),true);}
+  catch(e){const code=e.code||'unknown';const detail=code==='auth/invalid-credential'?'Firebase could not verify this email/password in the configured test project. Check that the account exists in nrcc-matchday-test and that the password is correct.':(e.message||'Sign-in failed.');adminMessage('Admin sign-in failed ['+code+']: '+detail,true);}
   finally{$('loginButton').disabled=false;}
 });
 $('signOutButton').addEventListener('click',async()=>{try{await signOut(auth);adminMessage('Signed out successfully.');}catch(e){adminMessage(e.message,true);}});
