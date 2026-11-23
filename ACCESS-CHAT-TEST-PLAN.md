@@ -31,20 +31,20 @@ A. Public account and chat
 [ ] A second signed-in user can see and reply to that message.
 [ ] A signed-out visitor cannot read or post public chat messages.
 
-B. APJ manager
+B. NRCC IB FC manager
 [ ] Create a test Authentication user.
 [ ] As Super Admin, create managerRoles/{UID} with team="apj", displayName, email, active=true.
-[ ] APJ manager can read and post in the APJ room.
-[ ] APJ manager is denied access to the PFO room.
-[ ] APJ manager cannot edit scores, match status, squads, awards, events, or manager roles.
+[ ] NRCC IB FC manager can read and post in the NRCC IB FC room.
+[ ] NRCC IB FC manager is denied access to the NYSC FC room.
+[ ] NRCC IB FC manager cannot edit scores, match status, squads, awards, events, or manager roles.
 [ ] Successful approved-manager access appears in the Super Admin audit list.
 
-C. PFO manager
+C. NYSC FC manager
 [ ] Create a separate test Authentication user.
 [ ] As Super Admin, create managerRoles/{UID} with team="pfo", displayName, email, active=true.
-[ ] PFO manager can read and post in the PFO room.
-[ ] PFO manager is denied access to the APJ room.
-[ ] PFO manager cannot edit scores, match status, squads, awards, events, or manager roles.
+[ ] NYSC FC manager can read and post in the NYSC FC room.
+[ ] NYSC FC manager is denied access to the NRCC IB FC room.
+[ ] NYSC FC manager cannot edit scores, match status, squads, awards, events, or manager roles.
 
 D. Super Admin and existing features
 [ ] Only the intended Super Admin UID can open the existing match controls.
