@@ -395,7 +395,7 @@ KKKKAKKKKAKKKKAKweiigIN0/wDkN5VU0nGiipyOkeJxqxer3h+tRRWI1lnR
       <p class="squad-edit-help">Update player names directly here. Enter one player per line, in order: the first 11 are starters and the final 9 are substitutes. Keep 20 names for each team. Changes are saved to Firebase and appear for everyone viewing the website.</p>
       <div class="admin-form">
         <div class="squad-edit-card apj"><h4>🔴 NRCC IB FC · Manager PDA</h4><label class="admin-field">Team coach<input id="editManagerAPJ" type="text" maxlength="40" value="PDA"></label><label class="admin-field" style="margin-top:10px">Players, one per line<textarea id="editSquadAPJ" spellcheck="false"></textarea></label></div>
-        <div class="squad-edit-card pfo"><h4>🔵 NYSC FC · Manager PSA</h4><label class="admin-field">Team coach<input id="editManagerPFO" type="text" maxlength="40" value="PSA"></label><label class="admin-field" style="margin-top:10px">Players, one per line<textarea id="editSquadPFO" spellcheck="false"></textarea></label></div>
+        <div class="squad-edit-card pfo"><h4>🔵 NYSC FC · Coach Emmie</h4><label class="admin-field">Team coach<input id="editManagerPFO" type="text" maxlength="40" value="Emmie"></label><label class="admin-field" style="margin-top:10px">Players, one per line<textarea id="editSquadPFO" spellcheck="false"></textarea></label></div>
       </div>
       <div class="admin-actions"><button class="btn btn-main" id="saveSquads" type="button">Save squad changes</button><button class="btn btn-alt" id="reloadSquads" type="button">Reload saved squads</button></div>
       <p class="admin-small">Jersey numbers remain assigned by roster slot, and the first 11 names appear on the pitch. To replace a player, edit that line without changing the number of lines.</p>
@@ -444,7 +444,7 @@ setInterval(updateCountdown,1000);
 
 const teams=[
  {id:'apj',name:'NRCC IB FC',squad:'Red Squad',manager:'PDD',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DM','CM','RM','CM','LM','ST','ST','CM','RB','DM','SUB','SUB','SUB','SUB','SUB'],players:['Min. Dami','Joshua','Michael','Vinval','Oplomania','Gracious','Dr. MBA','Francisspeedy','Mentor','DavidPsalms','Kahleb','Sapphire','Pst Temitope','Tobi','General','Alex','Samuel','Emmanuel','Joseph','Daniel']},
- {id:'pfo',name:'NYSC FC',squad:'Blue Squad',manager:'PSA',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DMF','CMF','RWF','AMF','LWF','CF','CB','CB / CMF','LB','RB','CMF','RWF','AMF','LWF','CF'],players:['Shanghai','AJ','Uthman','Henry','Friday','Ishola','Favour','Victor (Akin)','Victor (Omole)','Taiwo','Alex','Timi','Ope','Israel','BJ','ABU','Tomiwa','Awal','James','Peter']}
+ {id:'pfo',name:'NYSC FC',squad:'Blue Squad',manager:'Emmie',formation:'4-2-3-1',numbers:Array.from({length:20},(_,i)=>i+1),positions:['GK','RB','CB','CB','LB','DMF','CMF','RWF','AMF','LWF','CF','CB','CB / CMF','LB','RB','CMF','RWF','AMF','LWF','CF'],players:['Shanghai','AJ','Uthman','Henry','Friday','Ishola','Favour','Victor (Akin)','Victor (Omole)','Taiwo','Alex','Timi','Ope','Israel','BJ','ABU','Tomiwa','Awal','James','Peter']}
 ];
 const defaultSquads=teams.map(t=>({id:t.id,name:t.name,squad:t.squad,manager:t.manager,players:[...t.players],numbers:[...t.numbers]}));
 const positions=['GK','RB','CB','CB','LB','DM','CM','RM','CM','LM','ST','ST','CM','RB','DM','SUB','SUB','SUB','SUB','SUB'];
