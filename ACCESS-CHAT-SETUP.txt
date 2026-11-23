@@ -7,8 +7,8 @@ Existing live site is NOT changed by this branch until you deploy it.
 FEATURES IN THIS BUILD
 - Public match chat requires a signed-in account.
 - Visitors can create public accounts; this does not grant manager access.
-- APJ and PFO private manager rooms.
-- Manager role registry with four intended slots (two APJ, two PFO).
+- NRCC IB FC and NYSC FC private manager rooms.
+- Manager role registry with four intended slots (two NRCC IB FC, two NYSC FC).
 - Super Admin manager-login dashboard.
 - Main scoreboard controls remain Super Admin-only.
 - Successful manager sign-ins are recorded in managerLoginAudit.
@@ -29,7 +29,7 @@ DO NOT PUBLISH THE NEW RULES OR DEPLOY THIS BRANCH YET.
    - email: same email as the Authentication account
    - active: true
    Only the configured Super Admin can write managerRoles under the rules.
-8. Test with separate test accounts: public sign-up/sign-in and public chat; APJ manager can read/write APJ room but not PFO; PFO manager can read/write PFO but not APJ; ordinary public user cannot read either private room; only Super Admin can change match score, events, squads, awards, or manager roles.
+8. Test with separate test accounts: public sign-up/sign-in and public chat; NRCC IB FC manager can read/write the NRCC IB FC room but not NYSC FC; NYSC FC manager can read/write the NYSC FC room but not NRCC IB FC; ordinary public user cannot read either private room; only Super Admin can change match score, events, squads, awards, or manager roles.
 9. Verify the existing live scoreboard, match timeline, squad display, and report features after deployment. Keep rollback files available until checks pass.
 
 The draft branch is not production-ready until the rules and client code have been tested together.
